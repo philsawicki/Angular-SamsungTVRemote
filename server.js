@@ -50,17 +50,17 @@ router.route('/tv/:commandID')
 		remote.send(req.params.commandID, 
             function successCallback () {
                 res.json({
-                	message: 'Got command "' + req.params.commandID + '"',
+                	message: 'Successfully executed command "' + req.params.commandID + '"',
                 	success: true,
                 	error: false
                 });
             },
             function errorCallback (error) {
                 res.json({
-                	message: 'Got command "' + req.params.commandID + '"',
+                	message: 'Failed to execute command "' + req.params.commandID + '"',
                 	success: false,
                 	error: true,
-                	error: error
+                	errorMessage: error
                 });
             }
         );
