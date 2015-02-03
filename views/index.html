@@ -1,0 +1,108 @@
+<html>
+
+<head>
+	<title>TV Remote Demo</title>
+
+	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+
+
+<body>
+
+	<h1>TV Remote Demo</h1>
+
+	<button type="button" class="btn btn-primary" id="volumeUp">Volume Up</button>
+	<button type="button" class="btn btn-primary" id="volumeDown">Volume Down</button>
+	<button type="button" class="btn btn-primary" id="channelUp">Channel Up</button>
+	<button type="button" class="btn btn-primary" id="channelDown">Channel Down</button>
+
+	<div id="console"></div>
+
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+	jQuery(document).ready(function ($) {
+		var outputConsole = $('#console');
+
+		// Extremely basic handler for the "Volume Up" button:
+		$('#volumeUp').on('click', function (event) {
+			$(this).prop('disabled', true);
+
+			$.ajax({
+				url: '/api/tv/KEY_VOLUP',
+				success: function (data) {
+					outputConsole.text( JSON.stringify(data) );
+					console.log(data);
+					$('#volumeUp').prop('disabled', false);
+				},
+				error: function (err) {
+					outputConsole.text( JSON.stringify(err) );
+					console.error(err);
+					$('#volumeUp').prop('disabled', false);
+				}
+			})
+		});
+
+		// Extremely basic handler for the "Volume Down" button:
+		$('#volumeDown').on('click', function (event) {
+			$(this).prop('disabled', true);
+			
+			$.ajax({
+				url: '/api/tv/KEY_VOLDOWN',
+				success: function (data) {
+					outputConsole.text( JSON.stringify(data) );
+					console.log(data);
+					$('#volumeDown').prop('disabled', false);
+				},
+				error: function (err) {
+					outputConsole.text( JSON.stringify(err) );
+					console.error(err);
+					$('#volumeDown').prop('disabled', false);
+				}
+			})
+		});
+
+		// Extremely basic handler for the "Channel Up" button:
+		$('#channelUp').on('click', function (event) {
+			$(this).prop('disabled', true);
+			
+			$.ajax({
+				url: '/api/tv/KEY_CHUP',
+				success: function (data) {
+					outputConsole.text( JSON.stringify(data) );
+					console.log(data);
+					$('#channelUp').prop('disabled', false);
+				},
+				error: function (err) {
+					outputConsole.text( JSON.stringify(err) );
+					console.error(err);
+					$('#channelUp').prop('disabled', false);
+				}
+			})
+		});
+
+		// Extremely basic handler for the "Channel Down" button:
+		$('#channelDown').on('click', function (event) {
+			$(this).prop('disabled', true);
+			
+			$.ajax({
+				url: '/api/tv/KEY_CHDOWN',
+				success: function (data) {
+					outputConsole.text( JSON.stringify(data) );
+					console.log(data);
+					$('#channelDown').prop('disabled', false);
+				},
+				error: function (err) {
+					outputConsole.text( JSON.stringify(err) );
+					console.error(err);
+					$('#channelDown').prop('disabled', false);
+				}
+			})
+		});
+	});
+	</script>
+
+</body>
+</html>
