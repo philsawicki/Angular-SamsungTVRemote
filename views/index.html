@@ -171,7 +171,7 @@
 				 */
 				volumeUpCallback: function () {
 					remoteMediator.execute({
-						url: '/api/tv/KEY_VOLUP',
+						url: '/api/tv/command/KEY_VOLUP',
 						elementToDisable: '#volumeUp'
 					});
 				},
@@ -182,7 +182,7 @@
 				 */
 				volumeDownCallback: function () {
 					remoteMediator.execute({
-						url: '/api/tv/KEY_VOLDOWN',
+						url: '/api/tv/command/KEY_VOLDOWN',
 						elementToDisable: '#volumeDown'
 					});
 				},
@@ -193,18 +193,18 @@
 				 */
 				channelUpCallback: function () {
 					remoteMediator.execute({
-						url: '/api/tv/KEY_CHUP',
+						url: '/api/tv/command/KEY_CHUP',
 						elementToDisable: '#channelUp'
 					});
 				},
-				
+
 				/**
 				 * Extremely basic handler for the "Channel Down" button.
 				 * @return {void}
 				 */
 				channelDownCallback: function () {
 					remoteMediator.execute({
-						url: '/api/tv/KEY_CHDOWN',
+						url: '/api/tv/command/KEY_CHDOWN',
 						elementToDisable: '#channelDown'
 					});
 				}

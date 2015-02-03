@@ -45,26 +45,73 @@ router.route('/tv')
 	.post(function (req, res) {
 
 	});
-router.route('/tv/:commandID')
-	.get(function (req, res) {
-		remote.send(req.params.commandID, 
+
+// Service discovery:
+// From: http://www.samsungdforum.com/Guide/art00030/index.html
+router.route('/tv/discovery')
+    .get(function (req, res) {
+        var Client = require('node-ssdp').Client,
+            client = new Client(),
+            responses = [];
+
+        client.on('response', function (headers, statusCode, rinfo) {
+            responses.push({
+                headers: headers,
+                statusCode: statusCode,
+                rinfo: rinfo
+            });
+        });
+
+        // Search for a service type:
+        client.search('urn:samsung.com:service:MultiScreenService:1');
+
+        // Wait a few seconds while waiting for responses:
+        setTimeout(function () {
+            res.json(responses);
+        }, 2*1000);
+    });
+router.route('/tv/command/:commandID')
+    .get(function (req, res) {
+        remote.send(req.params.commandID, 
             function successCallback () {
                 res.json({
-                	message: 'Successfully executed command "' + req.params.commandID + '"',
-                	success: true,
-                	error: false
+                    message: 'Successfully executed command "' + req.params.commandID + '"',
+                    success: true,
+                    error: false
                 });
             },
             function errorCallback (error) {
                 res.json({
-                	message: 'Failed to execute command "' + req.params.commandID + '"',
-                	success: false,
-                	error: true,
-                	errorMessage: error
+                    message: 'Failed to execute command "' + req.params.commandID + '"',
+                    success: false,
+                    error: true,
+                    errorMessage: error
                 });
             }
         );
-	});
+    });
+router.route('/discovery/all')
+    .get(function (req, res) {
+        var Client = require('node-ssdp').Client,
+            client = new Client(),
+            responses = [];
+
+        client.on('response', function (headers, statusCode, rinfo) {
+            responses.push({
+                headers: headers,
+                statusCode: statusCode,
+                rinfo: rinfo
+            });
+        });
+
+        // Search for a service type:
+        client.search('ssdp:all');
+
+        // Wait a few seconds while waiting for responses:
+        setTimeout(function () {
+            res.json(responses);
+        }, 2*1000);
+    });
 
 // more routes for our API will happen here
 
