@@ -3,3 +3,43 @@
 <div>
 	Discovery Page for <em>SmartTV Remote</em>
 </div>
+
+
+<div class="page-header">
+	<h2><span class="glyphicon glyphicon-film"></span> Connected TVs</h2>
+</div>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Headers</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="tvDevice in tvDevices">
+			<th scope="row">{{ ::($index + 1) }}</th>
+			<td>{{ ::tvDevice.headers }}</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<div class="page-header">
+	<h2><span class="glyphicon glyphicon-transfer"></span> Connected Devices</h2>
+</div>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Headers</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="device in devices">
+			<th scope="row">{{ ::($index + 1) }}</th>
+			<td>{{ ::device.headers }}</td>
+		</tr>
+	</tbody>
+</table>
