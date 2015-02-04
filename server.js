@@ -10,7 +10,7 @@ var bodyParser = require('body-parser');
 var SamsungRemote = require('./proxy/Samsung-Remote');
 
 
-var viewsFolder = './views/';
+var viewsFolder = './app/views/';
 
 
 // configure remote
@@ -22,6 +22,13 @@ var remote = new SamsungRemote({
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// Enable CORS:
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+});
 
 var port = process.env.PORT || 8080;        // set our port
 
@@ -35,6 +42,8 @@ router.use(function (req, res, next) {
     console.log('Got ' + req.method + ' request for "' + req.url + '"');
     next(); // make sure we go to the next routes and don't stop here
 });
+
+
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function (req, res) {

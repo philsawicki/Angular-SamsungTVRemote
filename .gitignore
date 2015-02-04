@@ -42,4 +42,5 @@ Network Trash Folder
 Temporary Items
 .apdisk
 node_modules
+app/bower_components
 npm-debug.log

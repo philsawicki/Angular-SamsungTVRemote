@@ -8,13 +8,31 @@
     "dependencies": {
         "express": "~4.0.0",
         "body-parser": "~1.0.1",
-        "node-ssdp": "~1.0.0"
+        "node-ssdp": "~1.0.0",
+        "bower": "^1.3.1",
+        "chalk": "~0.4.0",
+        "combined-stream": "0.0.5",
+        "event-stream": "~3.1.0",
+        "gulp": "^3.8.6",
+        "gulp-angular-templatecache": "^1.2.1",
+        "gulp-clean": "~0.2.4",
+        "gulp-concat": "~2.2.0",
+        "gulp-html-replace": "~1.0.0",
+        "gulp-minify-css": "^0.3.7",
+        "gulp-minify-html": "^0.1.4",
+        "gulp-replace": "~0.2.0",
+        "gulp-uglify": "~0.2.1",
+        "http-server": "^0.6.1",
+        "karma": "~0.10",
+        "karma-junit-reporter": "^0.2.2",
+        "protractor": "^1.1.1",
+        "shelljs": "^0.2.6"
     },
     "scripts": {
         "postinstall": "bower install",
 
         "prestart": "npm install",
-        "start": "node server.js",
+        "start": "http-server -a localhost -p 8000 -c-1",
 
         "pretest": "npm install",
         "test": "karma start karma.conf.js",

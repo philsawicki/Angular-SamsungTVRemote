@@ -1,0 +1,173 @@
+<h1>Home</h1>
+
+<div>
+	Home Page for <em>SmartTV Remote</em>
+</div>
+
+
+<!-- Example row of columns -->
+<div class="row text-center">
+	<div class="col-md-3">
+		<h2>Volume Up</h2>
+		<p>Or &uparrow; on keyboard</p>
+		<p><a class="btn btn-primary" href="javascript:;" role="button" id="volumeUp">Volume Up &raquo;</a></p>
+	</div>
+	<div class="col-md-3">
+		<h2>Volume Down</h2>
+		<p>Or &downarrow; on keyboard</p>
+		<p><a class="btn btn-primary" href="javascript:;" role="button" id="volumeDown">Volume Down &raquo;</a></p>
+	</div>
+	<div class="col-md-3">
+		<h2>Channel Up</h2>
+		<p>Or &rightarrow; on keyboard</p>
+		<p><a class="btn btn-primary" href="javascript:;" role="button" id="channelUp">Channel Up &raquo;</a></p>
+	</div>
+	<div class="col-md-3">
+		<h2>Channel Down</h2>
+		<p>Or &leftarrow; on keyboard</p>
+		<p><a class="btn btn-primary" href="javascript:;" role="button" id="channelDown">Channel Down &raquo;</a></p>
+	</div>
+</div>
+
+<!-- Success/Error Infoboxes -->
+<div id="successInfobox" class="alert alert-success alert-dismissible" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<strong>Success!</strong> <span class="message"></span>
+</div>
+<div id="errorInfobox" class="alert alert-danger alert-dismissible" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<strong>Warning!</strong> <span class="message"></span>
+</div>
+<!-- /Success/Error Infoboxes -->
+
+
+	<script type="text/javascript">
+		jQuery(document).ready(function ($) {
+			var successInfobox = $('#successInfobox'),
+			    errorInfobox = $('#errorInfobox');
+
+			/**
+			 * Mediator to wrap actions between the Web Interface and the SmartTV.
+			 * @type {Object}
+			 */
+			var remoteMediator = {
+				execute: function (options) {
+					options.url = options.url || '//localhost:8080/api/tv/KEY_VOLDOWN';
+					options.elementToDisable = options.elementToDisable || '';
+
+					$(options.elementToDisable).prop('disabled', true);
+
+					$.ajax({
+						url: options.url,
+						success: function (data) {
+							if (data.success) {
+								successInfobox.find('.message').text(data.message);
+								successInfobox.show();
+								errorInfobox.hide();
+
+								console.log(data);
+							} else {
+								errorInfobox.find('.message').text(data.errorMessage);
+								errorInfobox.show();
+								successInfobox.hide();
+
+								console.error(data.errorMessage);
+							}
+
+							$(options.elementToDisable).prop('disabled', false);
+						},
+						error: function (err) {
+							errorInfobox.find('.message').text( JSON.stringify(err) );
+							errorInfobox.show();
+							successInfobox.hide();
+
+							console.error(err);
+							$(options.elementToDisable).prop('disabled', false);
+						}
+					})
+				}
+			};
+
+			/**
+			 * Actions to execute on the remote.
+			 * @type {Object}
+			 */
+			var remoteActions = {
+				/**
+				 * Extremely basic handler for the "Volume Up" button.
+				 * @return {void}
+				 */
+				volumeUpCallback: function () {
+					remoteMediator.execute({
+						url: '//localhost:8080/api/tv/command/KEY_VOLUP',
+						elementToDisable: '#volumeUp'
+					});
+				},
+
+				/**
+				 * Extremely basic handler for the "Volume Down" button.
+				 * @return {void}
+				 */
+				volumeDownCallback: function () {
+					remoteMediator.execute({
+						url: '//localhost:8080/api/tv/command/KEY_VOLDOWN',
+						elementToDisable: '#volumeDown'
+					});
+				},
+
+				/**
+				 * Extremely basic handler for the "Channel Up" button.
+				 * @return {void}
+				 */
+				channelUpCallback: function () {
+					remoteMediator.execute({
+						url: '//localhost:8080/api/tv/command/KEY_CHUP',
+						elementToDisable: '#channelUp'
+					});
+				},
+
+				/**
+				 * Extremely basic handler for the "Channel Down" button.
+				 * @return {void}
+				 */
+				channelDownCallback: function () {
+					remoteMediator.execute({
+						url: '//localhost:8080/api/tv/command/KEY_CHDOWN',
+						elementToDisable: '#channelDown'
+					});
+				}
+			};
+
+
+			// Register callbacks for CTA button clicks:
+			$('#volumeUp').on('click', remoteActions.volumeUpCallback);
+			$('#volumeDown').on('click', remoteActions.volumeDownCallback);
+			$('#channelUp').on('click', remoteActions.channelUpCallback);
+			$('#channelDown').on('click', remoteActions.channelDownCallback);
+
+			// Register callbacks for keypress events:
+			$('html').keydown(function (event) {
+				switch (event.keyCode) {
+					// Up arrow:
+					case 38:
+						remoteActions.volumeUpCallback();
+						break;
+
+					// Down arrow:
+					case 40:
+						remoteActions.volumeDownCallback();
+						break;
+
+					// Left arrow:
+					case 37:
+						remoteActions.channelDownCallback();
+						break;
+
+					// Right arrow:
+					case 39:
+						remoteActions.channelUpCallback();
+						break;
+				}
+			});
+		});
+	</script>
