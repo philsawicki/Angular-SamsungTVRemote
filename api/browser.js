@@ -13,8 +13,28 @@ var browserApi = function () {
      * @param  {[type]} res [description]
      * @return {[type]}     [description]
      */
-	var navigate = function (req, res) {
-        var body = '<?xml version="1.0" encoding="utf-8"?><s:Envelope s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><u:RunBrowser xmlns:u="urn:samsung.com:service:MainTVAgent2:1"><BrowserURL>http://www.google.com</BrowserURL></u:RunBrowser></s:Body></s:Envelope>';
+    var navigate = function (req, res) {
+        var websiteURL = req.params.websiteURL;
+
+        // Validate expected parameters:
+        if (!websiteURL) {
+            res.json({
+                message: 'Missing Website URL',
+                success: false,
+                error: true,
+                errorMessage: 'Missing Website URL'
+            });
+        }
+
+        var body = ''
+            + '<?xml version="1.0" encoding="utf-8"?>'
+            +     '<s:Envelope s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">'
+            +         '<s:Body>'
+            +             '<u:RunBrowser xmlns:u="urn:samsung.com:service:MainTVAgent2:1">'
+            +                 '<BrowserURL>' + websiteURL + '</BrowserURL>'
+            +             '</u:RunBrowser>'
+            +         '</s:Body>'
+            +     '</s:Envelope>';
 
         var postRequest = {
             host: '192.168.2.13',
@@ -52,9 +72,9 @@ var browserApi = function () {
     };
 
 
-	return {
-		navigate: navigate
-	};
+    return {
+        navigate: navigate
+    };
 }();
 
 

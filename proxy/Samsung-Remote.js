@@ -139,6 +139,14 @@ var SamsungRemote = function (config) {
         });
     };
 
+    this.getTVIP = function () {
+        return config.ip;
+    };
+
+    this.setTVIP = function (tvIP) {
+        config.ip = tvIP;
+    };
+
     var _closeSocket = function (socket) {
         socket.end();
         socket.destroy();

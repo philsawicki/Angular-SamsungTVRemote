@@ -49,5 +49,8 @@ app/bower_components/
 npm-debug.log
 
 # Temporary files & folders
+tmp
 tmp/
+tmp\
 tmp/templates.js
+tmp\templates.js

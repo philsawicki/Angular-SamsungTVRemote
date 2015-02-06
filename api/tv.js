@@ -7,31 +7,31 @@
  */
 var tvApi = function () {
 
-	/**
-	 * Samsung Remote.
-	 * @type {SamsungRemote|undefined}
-	 */
-	var _remote = undefined;
+    /**
+     * Samsung Remote.
+     * @type {SamsungRemote|undefined}
+     */
+    var _remote = undefined;
 
 
-	/**
-	 * Configure the Samsung Remote
-	 * @param  {Object} options The configuration options for the Samsung SmartTV Remote.
-	 * @return {void}
-	 */
-	var configureRemote = function (options) {
-		var SamsungRemote = require('./../proxy/Samsung-Remote');
+    /**
+     * Configure the Samsung Remote
+     * @param  {Object} options The configuration options for the Samsung SmartTV Remote.
+     * @return {void}
+     */
+    var configureRemote = function (options) {
+        var SamsungRemote = require('./../proxy/Samsung-Remote');
 
-		_remote = new SamsungRemote(options);
-	};
+        _remote = new SamsungRemote(options);
+    };
 
-	/**
-	 * Return an array of SSDP responses from connected Samsung SmartTVs which replied to UPnP request.
-	 * @param  {[type]} req [description]
-	 * @param  {[type]} res [description]
-	 * @return {[type]}     [description]
-	 */
-	var discovery = function (req, res) {
+    /**
+     * Return an array of SSDP responses from connected Samsung SmartTVs which replied to UPnP request.
+     * @param  {[type]} req [description]
+     * @param  {[type]} res [description]
+     * @return {[type]}     [description]
+     */
+    var discovery = function (req, res) {
         var SSDPClient = require('node-ssdp').Client,
             client = new SSDPClient(),
             SSDPResponses = [];
@@ -60,17 +60,35 @@ var tvApi = function () {
      * @return {[type]}     [description]
      */
     var sendCommand = function (req, res) {
-        _remote.send(req.params.commandID, 
+        var tvIP = req.params.tvIP;
+        var commandID = req.params.commandID;
+
+        // Validate expected parameters:
+        if (!commandID) {
+            res.json({
+                message: 'Missing TV Command',
+                success: false,
+                error: true,
+                errorMessage: 'Missing TV Command'
+            });
+        }
+
+        // Update TV IP if provided:
+        if (typeof tvIP !== 'undefined') {
+            _remote.setTVIP(tvIP);
+        }
+
+        _remote.send(commandID, 
             function successCallback () {
                 res.json({
-                    message: 'Successfully executed command "' + req.params.commandID + '"',
+                    message: 'Successfully executed command "' + commandID + '"',
                     success: true,
                     error: false
                 });
             },
             function errorCallback (error) {
                 res.json({
-                    message: 'Failed to execute command "' + req.params.commandID + '"',
+                    message: 'Failed to execute command "' + commandID + '"',
                     success: false,
                     error: true,
                     errorMessage: error
@@ -85,7 +103,7 @@ var tvApi = function () {
      * @param  {[type]} res [description]
      * @return {[type]}     [description]
      */
-	var watch = function (req, res) {
+    var watch = function (req, res) {
         var body = '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:StartCloneView xmlns:u="urn:samsung.com:service:MainTVAgent2:1"><ForcedFlag>Normal</ForcedFlag></u:StartCloneView></s:Body></s:Envelope>';
 
         var postRequest = {
@@ -123,13 +141,32 @@ var tvApi = function () {
         tvReq.end();
     };
 
+    /**
+     * Return the list of supported SmartTV Commands.
+     * @param  {[type]} req [description]
+     * @param  {[type]} res [description]
+     * @return {[type]}     [description]
+     */
+    var getSupportedCommands = function (req, res) {
+        var SmasungKeys = require('./../proxy/Samsung-Keys');
+        var supportedCommands = [];
 
-	return {
-		configureRemote: configureRemote,
-		discovery: discovery,
-		sendCommand: sendCommand,
-		watch: watch
-	};
+        for (var key in SmasungKeys) {
+            supportedCommands.push(key);
+        }
+
+        res.json(supportedCommands);
+        res.end();
+    };
+
+
+    return {
+        configureRemote: configureRemote,
+        discovery: discovery,
+        sendCommand: sendCommand,
+        watch: watch,
+        getSupportedCommands: getSupportedCommands
+    };
 }();
 
 

@@ -13,7 +13,7 @@ var discoveryApi = function () {
      * @param  {[type]} res [description]
      * @return {[type]}     [description]
      */
-	var all = function (req, res) {
+    var all = function (req, res) {
         var SSDPClient = require('node-ssdp').Client,
             client = new SSDPClient(),
             responses = [];
@@ -36,9 +36,9 @@ var discoveryApi = function () {
     };
 
 
-	return {
-		all: all
-	};
+    return {
+        all: all
+    };
 }();
 
 

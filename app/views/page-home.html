@@ -31,6 +31,19 @@
 		<p>Or &leftarrow; on keyboard</p>
 		<p><a class="btn btn-primary" href="javascript:;" role="button" id="channelDown">Channel Down &raquo;</a></p>
 	</div>
+
+	<!-- Select a Command to send to the SmartTV front the list of supported Commands: -->
+	<div class="col-md-12">
+		<form class="form-inline">
+			<div class="form-group">
+				<label for="commandSelect">Available Command:</label>
+				<select id="commandSelect">
+					<option ng-repeat="supportedCommand in supportedCommands">{{ ::supportedCommand }}</option>
+				</select>
+				<button id="sendCommand" type="submit" class="btn btn-primary">Send Command</button>
+			</div>
+		</form>
+	</div>
 </div>
 
 <!-- Success/Error Infoboxes -->
@@ -56,13 +69,19 @@
 			 */
 			var remoteMediator = {
 				execute: function (options) {
-					options.url = options.url || '//localhost:8080/api/tv/KEY_VOLDOWN';
-					options.elementToDisable = options.elementToDisable || '';
+					options.command = options.command || 'KEY_VOLDOWN';
+					options.API_URL = options.API_URL || '//localhost:8080/api/';
+					options.elementToDisable = options.elementToDisable || undefined;
 
-					$(options.elementToDisable).prop('disabled', true);
+					// Build the URL for the given Command:
+					var commandAPIURL = options.API_URL + 'tv/command/' + options.command;
+
+					if (options.elementToDisable) {
+						$(options.elementToDisable).prop('disabled', true);
+					}
 
 					$.ajax({
-						url: options.url,
+						url: commandAPIURL,
 						success: function (data) {
 							if (data.success) {
 								successInfobox.find('.message').text(data.message);
@@ -78,7 +97,9 @@
 								console.error(data.errorMessage);
 							}
 
-							$(options.elementToDisable).prop('disabled', false);
+							if (options.elementToDisable) {
+								$(options.elementToDisable).prop('disabled', false);
+							}
 						},
 						error: function (err) {
 							errorInfobox.find('.message').text( JSON.stringify(err) );
@@ -86,7 +107,9 @@
 							successInfobox.hide();
 
 							console.error(err);
-							$(options.elementToDisable).prop('disabled', false);
+							if (options.elementToDisable) {
+								$(options.elementToDisable).prop('disabled', false);
+							}
 						}
 					})
 				}
@@ -103,7 +126,7 @@
 				 */
 				volumeUpCallback: function () {
 					remoteMediator.execute({
-						url: '//localhost:8080/api/tv/command/KEY_VOLUP',
+						command: 'KEY_VOLUP',
 						elementToDisable: '#volumeUp'
 					});
 				},
@@ -114,7 +137,7 @@
 				 */
 				volumeDownCallback: function () {
 					remoteMediator.execute({
-						url: '//localhost:8080/api/tv/command/KEY_VOLDOWN',
+						command: 'KEY_VOLDOWN',
 						elementToDisable: '#volumeDown'
 					});
 				},
@@ -125,7 +148,7 @@
 				 */
 				channelUpCallback: function () {
 					remoteMediator.execute({
-						url: '//localhost:8080/api/tv/command/KEY_CHUP',
+						command: 'KEY_CHUP',
 						elementToDisable: '#channelUp'
 					});
 				},
@@ -136,8 +159,19 @@
 				 */
 				channelDownCallback: function () {
 					remoteMediator.execute({
-						url: '//localhost:8080/api/tv/command/KEY_CHDOWN',
+						command: 'KEY_CHDOWN',
 						elementToDisable: '#channelDown'
+					});
+				},
+
+				/**
+				 * Send a custom Command to the Remote.
+				 * @param  {string} command The command to send to the SmartTV.
+				 * @return {void}
+				 */
+				selectedCommandCallback : function (command) {
+					remoteMediator.execute({
+						command: command
 					});
 				}
 			};
@@ -172,6 +206,12 @@
 						remoteActions.channelUpCallback();
 						break;
 				}
+			});
+
+			// Register callback for the "Available Commands" select:
+			$('#sendCommand').on('click', function (event) {
+				var selectedCommand = $('#commandSelect').find('option:selected').val();
+				remoteActions.selectedCommandCallback(selectedCommand);
 			});
 		});
 	</script>

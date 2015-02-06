@@ -1,14 +1,19 @@
 /**
- * Module depencies.
+ * Module dependencies.
  */
 
 var express = require('express'),
     app = express(),
     bodyParser = require('body-parser');
 
+/**
+ * API Modules.
+ */
+
 var tvAPI = require('./api/tv'),
     discoveryAPI = require('./api/discovery'),
     browserAPI = require('./api/browser');
+
 
 
 /**
@@ -29,8 +34,8 @@ var viewsFolder = './app/views/',
     port = process.env.PORT || 8080;
 
 // Use bodyParser() to get the data from POST requests:
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); // Support URL-encoded bodies.
+app.use(bodyParser.json()); // Support JSON-encoded bodies.
 
 // Enable CORS:
 app.use(function (req, res, next) {
@@ -73,11 +78,15 @@ router.route('/tv/discovery')
     .get( tvAPI.discovery );
 router.route('/tv/watch')
     .get( tvAPI.watch);
-router.route('/tv/command/:commandID')
-    .get( tvAPI.sendCommand );
+router.route('/tv/commands')
+    .get( tvAPI.getSupportedCommands );
+router.route('/tv/command/:tvIP?/:commandID')
+    .get( tvAPI.sendCommand )
+    .post( tvAPI.sendCommand );
 
-router.route('/browse')
-    .get( browserAPI.navigate );
+router.route('/browse/:websiteURL')
+    .get( browserAPI.navigate )
+    .post( browserAPI.navigate );
 
 router.route('/discovery/all')
     .get( discoveryAPI.all );
