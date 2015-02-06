@@ -16,9 +16,9 @@ var SamsungRemote = function (config) {
     }
 
     config.host = config.host || {
-        ip: '127.0.0.1',
+        ip: '192.168.2.12',
         mac: '00:00:00:00',
-        name: 'NodeJS Samsung Remote'
+        name: 'DLNADOC/1.50 SEC_HHP_GT-P1000/1.0', //'NodeJS Samsung Remote'
     };
 
     config.appString = config.appString || 'iphone..iapp.samsung';

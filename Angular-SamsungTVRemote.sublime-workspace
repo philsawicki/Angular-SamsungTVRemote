@@ -4,6 +4,54 @@
 		"selected_items":
 		[
 			[
+				"smart",
+				"smartTVsPromise"
+			],
+			[
+				"succ",
+				"success"
+			],
+			[
+				"eleme",
+				"elementToDisable"
+			],
+			[
+				"el",
+				"elementToDisable"
+			],
+			[
+				"channelUp",
+				"channelUpCallback"
+			],
+			[
+				"volume",
+				"volumeDownCallback"
+			],
+			[
+				"chann",
+				"channelDownCallback"
+			],
+			[
+				"ch",
+				"channelUpCallback"
+			],
+			[
+				"vol",
+				"volumeUpCallback"
+			],
+			[
+				"success",
+				"successInfobox"
+			],
+			[
+				"error",
+				"errorInfobox"
+			],
+			[
+				"ke",
+				"keyPressCallback"
+			],
+			[
 				"for",
 				"formattedResponses"
 			],
@@ -276,10 +324,6 @@
 				"historicalDataPromise"
 			],
 			[
-				"error",
-				"errorMessages"
-			],
-			[
 				"err",
 				"errorMessages"
 			],
@@ -470,55 +514,36 @@
 			[
 				"array_merge",
 				"array_merge_recursive"
-			],
-			[
-				"_quer",
-				"_queryCoreReportingAPI"
-			],
-			[
-				"propert",
-				"webPropertyId"
-			],
-			[
-				"dimensi",
-				"dimensionValue"
-			],
-			[
-				"TVH",
-				"TVHebdoApp_favoriteShows"
-			],
-			[
-				"local",
-				"localStorage"
-			],
-			[
-				"google",
-				"googleAnalyticsFetchLabel"
-			],
-			[
-				"selec",
-				"selectedCity"
-			],
-			[
-				"ty",
-				"typeof"
-			],
-			[
-				"appe",
-				"appendToSchedule"
-			],
-			[
-				"requ",
-				"required	@required"
-			],
-			[
-				"requi",
-				"requires	@requires"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "server.js",
+			"settings":
+			{
+				"buffer_size": 7410,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "api/tv.js",
+			"settings":
+			{
+				"buffer_size": 56,
+				"line_ending": "Windows",
+				"name": "'use strict';"
+			}
+		},
+		{
+			"file": "proxy/Samsung-Remote.js",
+			"settings":
+			{
+				"buffer_size": 5775,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -564,10 +589,48 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote"
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/api",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/controllers",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/filters",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/providers",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/services",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/proxy"
 	],
 	"file_history":
 	[
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/package.json",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/.gitignore",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/css/app.css",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/gulpfile.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/app.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views/page-about.html",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views/page-discovery.html",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views/page-home.html",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/index.html",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/services/DiscoveryService.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/providers/ApplicationConfigurationProvider.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/providers/ErrorMessagesProvider.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/services/ApplicationStorageService.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/services/StorageService.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/controllers/HomePageController.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/controllers/AboutPageController.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/controllers/DiscoveryPageController.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/directives/NavigationBarDirective.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/controllers/RouteController.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views/partial-navigationBar.html",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/index-async.html",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/script_start.cmd",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views/index.html",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views/discovery.html",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/proxy/Samsung-Remote.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/proxy/Samsung-Keys.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/proxy/Samsung-Proxy.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/server.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/views/index.html",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/views/discovery.html",
 		"/C/Users/Philippe/Documents/GitHub/Angular-StockWatcher/app/js/services/StockService.js",
 		"/C/Users/Philippe/Documents/GitHub/Angular-StockWatcher/app/views/stockDividendHistory-partial.html",
 		"/C/Users/Philippe/Documents/GitHub/Angular-StockWatcher/app/js/controllers/StockChartController.js",
@@ -665,33 +728,11 @@
 		"/C/Program Files (x86)/EasyPHP-DevServer-14.1VC11/data/localweb/TVSchedule/app/database/seeds/ProviderSeeder.php",
 		"/C/Program Files (x86)/EasyPHP-DevServer-14.1VC11/data/localweb/TVSchedule/app/controllers/RegistrationController.php",
 		"/C/Program Files (x86)/EasyPHP-DevServer-14.1VC11/data/localweb/TVSchedule/app/models/ValidatedModel.php",
-		"/C/Program Files (x86)/EasyPHP-DevServer-14.1VC11/data/localweb/TVSchedule/app/lib/TVSchedule/Service/Cache/LaravelCache.php",
-		"/C/Program Files (x86)/EasyPHP-DevServer-14.1VC11/data/localweb/TVSchedule/app/lib/TVSchedule/Repository/RepositoryInterface.php",
-		"/C/Users/Philippe/Desktop/MIMS 2014/caps-child/content/author-bio.php",
-		"/C/Users/Philippe/Desktop/MIMS 2014/caps-child/header.php",
-		"/C/Users/Philippe/Desktop/MIMS/themese/analytics_usertype/custom.php",
-		"/C/Users/Philippe/Desktop/MIMS/themese/analytics_usertype/functions.php",
-		"/C/Users/Philippe/Desktop/TVHebdo/Client/index.html",
-		"/C/Users/Philippe/Desktop/TVHebdo/Client/js/TVHebdoApp.js",
-		"/C/Program Files (x86)/EasyPHP-5.3.9/www/GoogleAnalytics-CorrelationReporting/index.html",
-		"/C/Program Files (x86)/EasyPHP-5.3.9/www/GoogleAnalytics-CorrelationReporting/js/GoogleAnalyticsCorrelations.js",
-		"/C/Users/Philippe/Documents/GitHub/GoogleAnalytics-CorrelationReporting/index.html",
-		"/C/Users/Philippe/Documents/GitHub/GoogleAnalytics-CorrelationReporting/js/GoogleAnalyticsCorrelations.js",
-		"/C/Users/Philippe/Documents/GitHub/GoogleAnalytics-Boilerplates/js/MathUtils.js",
-		"/C/Program Files (x86)/EasyPHP-5.3.9/www/GoogleAnalytics-ReportingExample/hello_analytics_api_v3_auth.js",
-		"/C/Program Files (x86)/EasyPHP-5.3.9/www/GoogleAnalytics-ReportingExample/hello_analytics_api_v3.js",
-		"/C/Program Files (x86)/EasyPHP-5.3.9/www/GoogleAnalytics-ReportingExample/hello_analytics_api_v3.html",
-		"/C/Users/Philippe/Documents/GitHub/GoogleAnalytics-ReportingExample/hello_analytics_api_v3.html",
-		"/C/Users/Philippe/Documents/GitHub/GoogleAnalytics-ReportingExample/hello_analytics_api_v3_auth.js",
-		"/C/Users/Philippe/Desktop/TVHebdo/Server/index.php",
-		"/C/Users/Philippe/Documents/GitHub/GoogleAnalytics-Boilerplates/js/GoogleAnalyticsUserTiming.js",
-		"/C/Users/Philippe/Documents/GitHub/GoogleAnalytics-Boilerplates/js/tests/spec/MathUtilsSpec.js",
-		"/C/Users/Philippe/Documents/GitHub/GoogleAnalytics-Boilerplates/js/tests/SpecRunner.html",
-		"/C/Users/Philippe/Documents/GitHub/GoogleAnalytics-Boilerplates/js/tests/spec/GoogleAnalyticsUserTimingSpec.js"
+		"/C/Program Files (x86)/EasyPHP-DevServer-14.1VC11/data/localweb/TVSchedule/app/lib/TVSchedule/Service/Cache/LaravelCache.php"
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -706,6 +747,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"stockWatcher",
+			"smartTVRemote",
+			"vol",
 			"angular-route",
 			"animate",
 			"fade-in",
@@ -751,8 +795,98 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "server.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7410,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3202,
+								3206
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 2.0,
+						"translation.y": 1164.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "api/tv.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 56,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								56,
+								56
+							]
+						],
+						"settings":
+						{
+							"auto_name": "'use strict';",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "proxy/Samsung-Remote.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5775,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								401,
+								402
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
 			]
 		}
 	],

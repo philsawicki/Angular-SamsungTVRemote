@@ -1,25 +1,34 @@
-// server.js
+/**
+ * Module depencies.
+ */
 
-// BASE SETUP
-// =============================================================================
+var express = require('express'),
+    app = express(),
+    bodyParser = require('body-parser');
 
-// call the packages we need
-var express = require('express');        // call express
-var app = express();                 // define our app using express
-var bodyParser = require('body-parser');
-var SamsungRemote = require('./proxy/Samsung-Remote');
-
-
-var viewsFolder = './app/views/';
+var tvAPI = require('./api/tv'),
+    discoveryAPI = require('./api/discovery'),
+    browserAPI = require('./api/browser');
 
 
-// configure remote
-var remote = new SamsungRemote({
-    ip: '192.168.2.13' // required: IP address of the Samsung Smart TV
+/**
+ * Configure the Samsung SmartTV Remote.
+ */
+tvAPI.configureRemote({
+    ip: '192.168.2.13' // IP address of the Samsung SmartTV (required)
 });
 
-// configure app to use bodyParser()
-// this will let us get the data from a POST
+
+
+
+/**
+ * Configure Express.
+ */
+
+var viewsFolder = './app/views/',
+    port = process.env.PORT || 8080;
+
+// Use bodyParser() to get the data from POST requests:
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -30,109 +39,80 @@ app.use(function (req, res, next) {
     next();
 });
 
-var port = process.env.PORT || 8080;        // set our port
 
-// ROUTES FOR OUR API
-// =============================================================================
-var router = express.Router();              // get an instance of the express Router
 
-// middleware to use for all requests
+
+/**
+ * Configure routes.
+ */
+
+var router = express.Router();
+
+// middleware to use for all requests:
 router.use(function (req, res, next) {
-    // do logging
+    // Log the request:
     console.log('Got ' + req.method + ' request for "' + req.url + '"');
-    next(); // make sure we go to the next routes and don't stop here
+
+    next(); // Make sure we go to the next routes and don't stop here.
 });
 
 
-
-// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
+// Test route to make sure everything is working (accessed through a GET at "http://localhost:8080/api"):
 router.get('/', function (req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });   
+    res.json({
+        message: 'Hooray! Welcome to our API!'
+    });   
 });
 
-router.route('/tv')
-	.post(function (req, res) {
-
-	});
 
 // Service discovery:
 // From: http://www.samsungdforum.com/Guide/art00030/index.html
+// http://pastebin.com/jhSzuVSp
+// https://www.virusbtn.com/pdf/conference/vb2014/VB2014-Oh.pdf
 router.route('/tv/discovery')
-    .get(function (req, res) {
-        var Client = require('node-ssdp').Client,
-            client = new Client(),
-            responses = [];
-
-        client.on('response', function (headers, statusCode, rinfo) {
-            responses.push({
-                headers: headers,
-                statusCode: statusCode,
-                rinfo: rinfo
-            });
-        });
-
-        // Search for a service type:
-        client.search('urn:samsung.com:service:MultiScreenService:1');
-
-        // Wait a few seconds while waiting for responses:
-        setTimeout(function () {
-            res.json(responses);
-        }, 2*1000);
-    });
+    .get( tvAPI.discovery );
+router.route('/tv/watch')
+    .get( tvAPI.watch);
 router.route('/tv/command/:commandID')
-    .get(function (req, res) {
-        remote.send(req.params.commandID, 
-            function successCallback () {
-                res.json({
-                    message: 'Successfully executed command "' + req.params.commandID + '"',
-                    success: true,
-                    error: false
-                });
-            },
-            function errorCallback (error) {
-                res.json({
-                    message: 'Failed to execute command "' + req.params.commandID + '"',
-                    success: false,
-                    error: true,
-                    errorMessage: error
-                });
-            }
-        );
-    });
+    .get( tvAPI.sendCommand );
+
+router.route('/browse')
+    .get( browserAPI.navigate );
+
 router.route('/discovery/all')
-    .get(function (req, res) {
-        var Client = require('node-ssdp').Client,
-            client = new Client(),
-            responses = [];
+    .get( discoveryAPI.all );
 
-        client.on('response', function (headers, statusCode, rinfo) {
-            responses.push({
-                headers: headers,
-                statusCode: statusCode,
-                rinfo: rinfo
-            });
-        });
+// ...
 
-        // Search for a service type:
-        client.search('ssdp:all');
 
-        // Wait a few seconds while waiting for responses:
-        setTimeout(function () {
-            res.json(responses);
-        }, 2*1000);
-    });
 
-// more routes for our API will happen here
 
-// REGISTER OUR ROUTES -------------------------------
-// all of our routes will be prefixed with /api
+/**
+ * Register routes to the application.
+ *
+ * All routes will be prefixed by "/api".
+ */
 app.use('/api', router);
 
 app.get('/', function (req, res) {
-	res.sendfile(viewsFolder + 'index.html')
-})
+    res.sendfile(viewsFolder + 'index.html')
+});
 
-// START THE SERVER
-// =============================================================================
+
+
+
+/**
+ * Start the server.
+ */
+
 app.listen(port);
 console.log('Server listening on port "' + port + '"');
+
+
+
+
+/**
+ * Export the API Module.
+ * @type {Object}
+ */
+module.exports = app;
