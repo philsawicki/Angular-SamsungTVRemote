@@ -19,7 +19,10 @@ angular.module('smartTVRemote.Services')
 				
 				var url = '//localhost:8080/api/tv/discovery';
 				
-				$http.get(url, { timeout: timeoutPromise.promise })
+				$http.get(url, {
+					timeout: timeoutPromise.promise,
+					cache: false // Do not cache the results, as we always want the latest data
+				})
 					.success(function (data) {
 						if (data.length === 0) {
 							// Fail the request, as no data has been received:
@@ -29,12 +32,7 @@ angular.module('smartTVRemote.Services')
 							});
 						} else {
 							// Parse & format the data received:
-							for (var i = 0, count = data.length; i < count; i++) {
-								var deviceInfo = data[i];
-
-								// Split on line breaks ("/r/n"):
-								deviceInfo.headersFormatted = deviceInfo.headers.split( String.fromCharCode(13, 10) );
-							}
+							// ...
 						}
 						
 
@@ -51,7 +49,7 @@ angular.module('smartTVRemote.Services')
 						if (requestTimedOut) {
 							deferred.reject({
 								error: errorMessages.Timeout.Error,
-								message: errorMessages.Timeout.Message.format(appConfig.JSONPTimeout),
+								message: errorMessages.Timeout.Message.format(appConfig.JSONTimeout),
 								data: data
 							});
 						} else {
@@ -64,7 +62,7 @@ angular.module('smartTVRemote.Services')
 				timeoutCountdown = $timeout(function () {
 					requestTimedOut = true;
 					timeoutPromise.resolve();
-				}, appConfig.JSONPTimeout);
+				}, appConfig.JSONTimeout);
 
 				return deferred.promise;
 			};
@@ -81,7 +79,10 @@ angular.module('smartTVRemote.Services')
 				
 				var url = '//localhost:8080/api/discovery/all';
 				
-				$http.get(url, { timeout: timeoutPromise.promise })
+				$http.get(url, {
+					timeout: timeoutPromise.promise,
+					cache: false // Do not cache the results, as we always want the latest data
+				})
 					.success(function (data) {
 						if (data.length === 0) {
 							// Fail the request, as no data has been received:
@@ -113,7 +114,7 @@ angular.module('smartTVRemote.Services')
 						if (requestTimedOut) {
 							deferred.reject({
 								error: errorMessages.Timeout.Error,
-								message: errorMessages.Timeout.Message.format(appConfig.JSONPTimeout),
+								message: errorMessages.Timeout.Message.format(appConfig.JSONTimeout),
 								data: data
 							});
 						} else {
@@ -126,7 +127,7 @@ angular.module('smartTVRemote.Services')
 				timeoutCountdown = $timeout(function () {
 					requestTimedOut = true;
 					timeoutPromise.resolve();
-				}, appConfig.JSONPTimeout);
+				}, appConfig.JSONTimeout);
 
 				return deferred.promise;
 			};

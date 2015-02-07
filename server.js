@@ -77,7 +77,9 @@ router.get('/', function (req, res) {
 router.route('/tv/discovery')
     .get( tvAPI.discovery );
 router.route('/tv/watch')
-    .get( tvAPI.watch);
+    .get( tvAPI.watch );
+router.route('/tv/details')
+    .get( tvAPI.details );
 router.route('/tv/commands')
     .get( tvAPI.getSupportedCommands );
 router.route('/tv/command/:tvIP?/:commandID')

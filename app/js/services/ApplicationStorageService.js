@@ -8,7 +8,7 @@ angular.module('smartTVRemote.Services')
 		function ($window, appConfig, storageService) {
 
 			/**
-			 * Cache to bypass I/O access to storage.
+			 * Cache to bypass length I/O access to storage.
 			 * @type {Object}
 			 */
 			var _cache = {};
@@ -65,9 +65,44 @@ angular.module('smartTVRemote.Services')
 			};
 
 
+
+			/**
+			 * Gets the MAC address of the associated SmartTV.
+			 * @return {string} The MAC address of the associated SmartTv.
+			 */
+			var getConnectedTVMAC = function () {
+				var key = appConfig.StorageKeys.ConnectedTVMAC;
+
+				// Try to retrieve data from cache:
+				var cachedData = _getFromCache(key);
+				if (cachedData) {
+					return cachedData;
+				}
+
+				var savedTVMac = storageService.getData(key);
+				return savedTVMac;
+			};
+
+			/**
+			 * Saves the MAC address of the associated SmartTV
+			 * @param {string} tvMAC The MAC address of the associated SmartTV.
+			 */
+			var setConnectedTVMAC = function (tvMAC) {
+				var key = appConfig.StorageKeys.ConnectedTVMAC;
+
+				// Save the data to cache:
+				_setCache(key, tvMAC);
+
+				storageService.setData(key, tvMAC);
+			};
+
+
 			return {
 				getConnectedTVIP: getConnectedTVIP,
-				setConnectedTVIP: setConnectedTVIP
+				setConnectedTVIP: setConnectedTVIP,
+
+				getConnectedTVMAC: getConnectedTVMAC,
+				setConnectedTVMAC: setConnectedTVMAC
 			};
 		}
 	]);

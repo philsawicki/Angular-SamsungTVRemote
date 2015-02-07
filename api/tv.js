@@ -29,7 +29,7 @@ var tvApi = function () {
      * Return an array of SSDP responses from connected Samsung SmartTVs which replied to UPnP request.
      * @param  {[type]} req [description]
      * @param  {[type]} res [description]
-     * @return {[type]}     [description]
+     * @return {void}
      */
     var discovery = function (req, res) {
         var SSDPClient = require('node-ssdp').Client,
@@ -37,8 +37,27 @@ var tvApi = function () {
             SSDPResponses = [];
 
         client.on('response', function (headers, statusCode, rinfo) {
+            // Split on line breaks ("/r/n"):
+            var headersFormatted = headers.split( String.fromCharCode(13, 10) );
+            
+            // Extract the headers:
+            var headersParsed = {};
+            for (var i = 0, nbHeaders = headersFormatted.length; i < nbHeaders; i++) {
+                var item = headersFormatted[i];
+
+                var firstColonIndex = item.indexOf(':');
+                if (firstColonIndex > -1) {
+                    var key = item.substring(0, firstColonIndex);
+                    var value = item.substring(firstColonIndex + 1, item.length).trim();
+
+                    headersParsed[key] = value;
+                }
+            }
+
             SSDPResponses.push({
                 headers: headers,
+                headersFormatted: headersFormatted,
+                headersParsed: headersParsed,
                 statusCode: statusCode,
                 rinfo: rinfo
             });
@@ -50,14 +69,94 @@ var tvApi = function () {
         // Wait a few seconds while waiting for SSDP responses:
         setTimeout(function () {
             res.json(SSDPResponses);
-        }, 2*1000);
+        }, 1*1000);
+    };
+
+    /**
+     * Return the SmartTV "description.xml" file, listing product information & its specs.
+     * @param  {[type]} req [description]
+     * @param  {[type]} res [description]
+     * @return {void}
+     */
+    var details = function (req, res) {
+        var SSDPClient = require('node-ssdp').Client,
+            client = new SSDPClient(),
+            SSDPResponses = [];
+
+        client.on('response', function (headers, statusCode, rinfo) {
+            // Split on line breaks ("/r/n"):
+            var headersFormatted = headers.split( String.fromCharCode(13, 10) );
+            
+            // Extract the headers:
+            var headersParsed = {};
+            for (var i = 0, nbHeaders = headersFormatted.length; i < nbHeaders; i++) {
+                var item = headersFormatted[i];
+
+                var firstColonIndex = item.indexOf(':');
+                if (firstColonIndex > -1) {
+                    var key = item.substring(0, firstColonIndex);
+                    var value = item.substring(firstColonIndex + 1, item.length).trim();
+
+                    headersParsed[key] = value;
+                }
+            }
+
+            SSDPResponses.push({
+                headers: headers,
+                headersFormatted: headersFormatted,
+                headersParsed: headersParsed,
+                statusCode: statusCode,
+                rinfo: rinfo
+            });
+        });
+
+        // Search for a service type:
+        client.search('urn:samsung.com:service:MultiScreenService:1');
+
+        // Wait a few seconds while waiting for SSDP responses:
+        setTimeout(function () {
+            if (SSDPResponses.length > 0) {
+                var firstResponse = SSDPResponses[0];
+
+                var location = firstResponse.headersParsed['LOCATION'];
+                if (location) {
+                    var http = require('http');
+
+                    http.get(location, function (xmlRes) {
+                        var buffer = '';
+
+                        xmlRes.on('data', function (data) {
+                            buffer += data;
+                        });
+                        xmlRes.on('end', function (data) {
+                            res.write(buffer);
+                            res.end();
+                        });
+                    }).on('error', function (error) {
+                        res.json({
+                            message: 'Error.',
+                            success: false,
+                            error: true,
+                            errorMessage: error
+                        });
+                    });
+                }
+            } else {
+                res.json({
+                    message: 'No TV connected.',
+                    success: false,
+                    error: true,
+                    errorMessage: 'No TV connected'
+                });
+            }
+        }, 1*1000);
     };
 
     /**
      * Send the given command to the SmartTV through the Remote.
      * @param  {[type]} req [description]
      * @param  {[type]} res [description]
-     * @return {[type]}     [description]
+     * @return {void}
      */
     var sendCommand = function (req, res) {
         var tvIP = req.params.tvIP;
@@ -101,7 +200,7 @@ var tvApi = function () {
      * Try to send a client request for a "StartCloneView".
      * @param  {[type]} req [description]
      * @param  {[type]} res [description]
-     * @return {[type]}     [description]
+     * @return {void}
      */
     var watch = function (req, res) {
         var body = '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:StartCloneView xmlns:u="urn:samsung.com:service:MainTVAgent2:1"><ForcedFlag>Normal</ForcedFlag></u:StartCloneView></s:Body></s:Envelope>';
@@ -145,7 +244,7 @@ var tvApi = function () {
      * Return the list of supported SmartTV Commands.
      * @param  {[type]} req [description]
      * @param  {[type]} res [description]
-     * @return {[type]}     [description]
+     * @return {void}
      */
     var getSupportedCommands = function (req, res) {
         var SmasungKeys = require('./../proxy/Samsung-Keys');
@@ -165,7 +264,8 @@ var tvApi = function () {
         discovery: discovery,
         sendCommand: sendCommand,
         watch: watch,
-        getSupportedCommands: getSupportedCommands
+        getSupportedCommands: getSupportedCommands,
+        details: details
     };
 }();
 

@@ -46,7 +46,7 @@ angular.module('smartTVRemote.Services')
 						if (requestTimedOut) {
 							deferred.reject({
 								error: errorMessages.Timeout.Error,
-								message: errorMessages.Timeout.Message.format(appConfig.JSONPTimeout),
+								message: errorMessages.Timeout.Message.format(appConfig.JSONTimeout),
 								data: data
 							});
 						} else {
@@ -59,7 +59,7 @@ angular.module('smartTVRemote.Services')
 				timeoutCountdown = $timeout(function () {
 					requestTimedOut = true;
 					timeoutPromise.resolve();
-				}, appConfig.JSONPTimeout);
+				}, appConfig.JSONTimeout);
 
 				return deferred.promise;
 			};

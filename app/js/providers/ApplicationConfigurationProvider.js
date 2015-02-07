@@ -10,8 +10,10 @@ angular.module('smartTVRemote.Providers')
 		// Initial/default config:
 		var appConfig = {
 			JSONPTimeout: 10*1000, // Delay before assuming that a JSONP request failed due to a timeout (in ms)
+			JSONTimeout: 10*1000, // Delay before assuming that a JSON request failed due to a timeout (in ms)
 			StorageKeys: { // Keys to access stored values (currently serialized to "localStorage")
-				ConnectedTVIP: storageKeyPrefix + 'connectedTVIP' // IP of the connected SmartTV.
+				ConnectedTVIP: storageKeyPrefix + 'connectedTVIP', // IP of the connected SmartTV.
+				ConnectedTVMAC: storageKeyPrefix + 'connectedTVMAC' // MAC address of the associated SmartTV.
 			}
 		};
 

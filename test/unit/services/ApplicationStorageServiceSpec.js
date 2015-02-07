@@ -9,7 +9,8 @@ describe('ApplicationStorageService', function () {
 	    appConfig = undefined;
 
 	var constants = {
-		connectedTVIP: '192.168.2.13'
+		connectedTVIP: '192.168.2.13',
+		connectedTVMAC: '01:23:45:67:89:ab'
 	};
 
 
@@ -50,6 +51,25 @@ describe('ApplicationStorageService', function () {
 			applicationStorageService.setConnectedTVIP(constants.connectedTVIP);
 
 			var storedValue = applicationStorageService.getConnectedTVIP();
+
+			expect(typeof storedValue).toEqual('string');
+		});
+	});
+
+	describe('TV MAC storage', function () {
+		it('can save and retrieve TV MAC', function () {
+			applicationStorageService.setConnectedTVMAC(constants.connectedTVMAC);
+
+			var storedValue = applicationStorageService.getConnectedTVMAC();
+
+			expect(storedValue).toEqual(constants.connectedTVMAC);
+			expect(storageService.setData).toHaveBeenCalled();
+		});
+
+		it('should not return a string', function () {
+			applicationStorageService.setConnectedTVMAC(constants.connectedTVMAC);
+
+			var storedValue = applicationStorageService.getConnectedTVMAC();
 
 			expect(typeof storedValue).toEqual('string');
 		});
