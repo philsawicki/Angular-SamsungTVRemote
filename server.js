@@ -80,7 +80,13 @@ router.route('/tv/watch')
     .get( tvAPI.watch );
 router.route('/tv/details')
     .get( tvAPI.details );
-router.route('/tv/commands')
+router.route('/tv/details/:tvLocationUrl')
+    .get( tvAPI.detailsForSpecificTV )
+    .post( tvAPI.detailsForSpecificTV );
+router.route('/tv/GetDTVInformation/:host/:port/:tvControlUrl')
+    .get( tvAPI.getDTVInformation )
+    .post( tvAPI.getDTVInformation );
+router.route('/tv/commands/')
     .get( tvAPI.getSupportedCommands );
 router.route('/tv/command/:tvIP?/:commandID')
     .get( tvAPI.sendCommand )

@@ -19,7 +19,7 @@
 	<tbody>
 		<tr ng-repeat="tvDevice in tvDevices">
 			<th scope="row">{{ ::($index + 1) }}</th>
-			<td>{{ ::tvDevice.headers }}</td>
+			<td ng-click="getTVDetails(tvDevice)">{{ ::tvDevice.headers }}</td>
 		</tr>
 	</tbody>
 </table>

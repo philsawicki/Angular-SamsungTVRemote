@@ -73,6 +73,104 @@ var tvApi = function () {
     };
 
     /**
+     * Return the SmartTV "description.xml" file for the given TV "LOCATION" header.
+     * @param  {[type]} req [description]
+     * @param  {[type]} res [description]
+     * @return {[type]}     [description]
+     */
+    var detailsForSpecificTV = function (req, res) {
+        var tvLocationUrl = req.params.tvLocationUrl;
+
+        // Validate expected parameters:
+        if (!tvLocationUrl) {
+            res.json({
+                message: 'Missing TV Location URL',
+                success: false,
+                error: true,
+                errorMessage: 'Missing TV Location URL'
+            });
+        }
+
+
+        var http = require('http');
+
+        http.get(tvLocationUrl, function (xmlRes) {
+            var buffer = '';
+
+            xmlRes.on('data', function (data) {
+                buffer += data;
+            });
+            xmlRes.on('end', function (data) {
+                res.write(buffer);
+                res.end();
+            });
+        }).on('error', function (error) {
+            res.json({
+                message: 'Error.',
+                success: false,
+                error: true,
+                errorMessage: error
+            });
+        });
+    };
+
+    /**
+     * Return the SmartTV's response to the "GetDTVInformation" request.
+     * @param  {[type]} req [description]
+     * @param  {[type]} res [description]
+     * @return {[type]}     [description]
+     */
+    var getDTVInformation = function (req, res) {
+        var tvHost = req.params.host;
+        var tvPort = req.params.port;
+        var tvControlUrl = req.params.tvControlUrl;
+
+        // Validate expected parameters:
+        if (!tvControlUrl) {
+            res.json({
+                message: 'Missing TV Control URL',
+                success: false,
+                error: true,
+                errorMessage: 'Missing TV Control URL'
+            });
+        }
+
+
+        var body = '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:GetDTVInformation xmlns:u="urn:samsung.com:service:MainTVAgent2:1"></u:GetDTVInformation></s:Body></s:Envelope>';
+
+        var postRequest = {
+            host: tvHost,
+            path: '/smp_4_',
+            port: tvPort,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/xml;charset="utf-8"',
+                'Content-Length': Buffer.byteLength(body),
+                'User-Agent': 'DLNADOC/1.50 SEC_HHP_GT-P1000/1.0', //'NodeJS Samsung Remote', //'DLNADOC/1.50 SEC_HHP_GT-P1000/1.0', (Samsung Galaxy Tab)
+                'SOAPACTION': '"urn:samsung.com:service:MainTVAgent2:1#GetDTVInformation"'
+            }
+        };
+
+        var http = require('http');
+        var buffer = '';
+
+        var tvReq = http.request(postRequest, function (tvRes) {
+            tvRes.setEncoding('utf8');
+
+            tvRes.on('data', function (data) {
+                buffer += data;
+            });
+            tvRes.on('end', function (data) {
+                res.write(buffer);
+                res.end();
+            });
+        });
+
+        tvReq.write(body);
+        tvReq.end();
+    };
+
+    /**
      * Return the SmartTV "description.xml" file, listing product information & its specs.
      * @param  {[type]} req [description]
      * @param  {[type]} res [description]
@@ -265,7 +363,9 @@ var tvApi = function () {
         sendCommand: sendCommand,
         watch: watch,
         getSupportedCommands: getSupportedCommands,
-        details: details
+        details: details,
+        detailsForSpecificTV: detailsForSpecificTV,
+        getDTVInformation: getDTVInformation
     };
 }();
 
