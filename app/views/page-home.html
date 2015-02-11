@@ -74,7 +74,11 @@
 					options.elementToDisable = options.elementToDisable || undefined;
 
 					// Build the URL for the given Command:
-					var commandAPIURL = options.API_URL + 'tv/command/' + options.command;
+					var tvIP = undefined;
+					var commandAPIURL = options.API_URL
+						+ 'tv/command/'
+						+ (typeof tvIP === 'undefined' ? '' : tvIP + '/')
+						+ options.command;
 
 					if (options.elementToDisable) {
 						$(options.elementToDisable).prop('disabled', true);

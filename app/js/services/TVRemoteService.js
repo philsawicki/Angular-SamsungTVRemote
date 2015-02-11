@@ -4,8 +4,8 @@
  * SmartTV Remote Service.
  */
 angular.module('smartTVRemote.Services')
-	.factory('tvRemoteService', ['$q', '$http', '$timeout', 'appConfig', 'errorMessages', 
-		function ($q, $http, $timeout, appConfig, errorMessages) {
+	.factory('tvRemoteService', ['$q', '$http', '$timeout', 'appConfig', 'errorMessages', 'XMLToJSON',
+		function ($q, $http, $timeout, appConfig, errorMessages, XMLToJSON) {
 
 			/**
 			 * Gets all the commands supported by the connected SmartTV.
@@ -69,6 +69,7 @@ angular.module('smartTVRemote.Services')
 
 			/**
 			 * Gets all the services supported by the connected SmartTV.
+			 * @param {string} tvLocationUrl The "LOCATION" Header of the SmartTV.
 			 * @return {Deferred.promise} A promise to be resolved when the request is successfully received.
 			 */
 			var getTVServices = function (tvLocationUrl) {
@@ -81,7 +82,12 @@ angular.module('smartTVRemote.Services')
 				
 				$http.get(url, {
 					timeout: timeoutPromise.promise,
-					cache: false // Do not cache the results, as we always want the latest data
+					cache: false, // Do not cache the results, as we always want the latest data
+					transformResponse: function (data) {
+						// Convert the data to JSON:
+						var json = XMLToJSON.xml_str2json(data);
+						return json;
+					}
 				})
 					.success(function (data) {
 						if (data.length === 0) {
@@ -136,6 +142,9 @@ angular.module('smartTVRemote.Services')
 
 			/**
 			 * Gets all the SOAP operations supported by the connected SmartTV.
+			 * @param {string}     tvHost        The SmartTV Host (eg: "192.168.2.13").
+			 * @param {string|int} tvPort        The SmartTV communication Port number (eg: 7676).
+			 * @param {string}     tvLocationUrl The SmartTV "LOCATION" Header (eg: "/smp_4_").
 			 * @return {Deferred.promise} A promise to be resolved when the request is successfully received.
 			 */
 			var getDTVInformation = function (tvHost, tvPort, tvLocationUrl) {
@@ -151,10 +160,15 @@ angular.module('smartTVRemote.Services')
 				
 				$http.get(url, {
 					timeout: timeoutPromise.promise,
-					cache: false // Do not cache the results, as we always want the latest data
+					cache: false, // Do not cache the results, as we always want the latest data
+					transformResponse: function (data) {
+						// Convert the data to JSON:
+						var json = XMLToJSON.xml_str2json(data);
+						return json;
+					}
 				})
 					.success(function (data) {
-						if (data.length === 0) {
+						if (!data) {
 							// Fail the request, as no data has been received:
 							deferred.reject({
 								error: errorMessages.NoData.Error,

@@ -48,19 +48,13 @@ angular.module('smartTVRemote.Controllers')
 
 						var tvHost = parser.hostname;
 						var tvPort = parser.port;
-
-						var controlURL = '';
-						var regex = new RegExp('<controlURL>(.+?)<\/controlURL>');
-						var m = regex.exec(xmlData);
-						if (m !== null) {
-							controlURL = m[1];
-						}
+						var tvControlURL = xmlData.root.device.serviceList.service.controlURL;
 						
-
-						var getDTVInformationPromise = tvRemoteService.getDTVInformation(tvHost, tvPort, controlURL);
+						var getDTVInformationPromise = tvRemoteService.getDTVInformation(tvHost, tvPort, tvControlURL);
 						getDTVInformationPromise.then(
 							function success (data) {
-								console.log(data);
+								var DTVInformation = data.Envelope.Body.GetDTVInformationResponse.DTVInformation;
+								console.log(DTVInformation);
 							},
 							function error (reason) {
 								console.error(reason);
