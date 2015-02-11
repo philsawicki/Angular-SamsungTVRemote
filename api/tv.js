@@ -13,6 +13,12 @@ var tvApi = function () {
      */
     var _remote = undefined;
 
+    /**
+     * HTTP Web requests.
+     * @type {http}
+     */
+    var _http = require('http');
+
 
     /**
      * Configure the Samsung Remote
@@ -64,7 +70,8 @@ var tvApi = function () {
         });
 
         // Search for a service type:
-        client.search('urn:samsung.com:service:MultiScreenService:1');
+        //client.search('urn:samsung.com:service:MultiScreenService:1');
+        client.search('urn:samsung.com:device:RemoteControlReceiver:1');
 
         // Wait a few seconds while waiting for SSDP responses:
         setTimeout(function () {
@@ -92,9 +99,8 @@ var tvApi = function () {
         }
 
 
-        var http = require('http');
-
-        http.get(tvLocationUrl, function (xmlRes) {
+        //var http = require('http');
+        _http.get(tvLocationUrl, function (xmlRes) {
             var buffer = '';
 
             xmlRes.on('data', function (data) {
@@ -140,7 +146,7 @@ var tvApi = function () {
 
         var postRequest = {
             host: tvHost,
-            path: '/smp_4_',
+            path: '/smp_4_', // Even tough the "controlURL" can be something like "/smp_8_", the TV seems to only respond when queried through "/smp_4_"...
             port: tvPort,
             method: 'POST',
             headers: {
@@ -151,10 +157,10 @@ var tvApi = function () {
             }
         };
 
-        var http = require('http');
+        //var http = require('http');
         var buffer = '';
 
-        var tvReq = http.request(postRequest, function (tvRes) {
+        var tvReq = _http.request(postRequest, function (tvRes) {
             tvRes.setEncoding('utf8');
 
             tvRes.on('data', function (data) {
@@ -316,10 +322,10 @@ var tvApi = function () {
             }
         };
 
-        var http = require('http');
+        //var http = require('http');
         var buffer = '';
 
-        var tvReq = http.request(postRequest, function (tvRes) {
+        var tvReq = _http.request(postRequest, function (tvRes) {
             console.log('STATUS: ' + tvRes.statusCode);
             console.log('HEADERS: ' + JSON.stringify(tvRes.headers));
             tvRes.setEncoding('utf8');

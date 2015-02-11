@@ -32,6 +32,7 @@ gulp.task('package-partials', function() {
 gulp.task('minify-js', ['package-partials'], function() {
     // Library references (order-dependent):
     var libs = [
+        './lib/x2js-v1.1.5/xml2json.js',
         //'./app/bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js',
         //'./app/bower_components/jquery/dist/jquery.js',
         //'./app/bower_components/angular/angular.js',
