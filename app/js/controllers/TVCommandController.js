@@ -57,7 +57,7 @@ angular.module('smartTVRemote.Controllers')
 							successInfobox.hide();
 
 							console.error(err);
-							
+
 							elementToDisable.prop('disabled', false);
 						}
 					);
