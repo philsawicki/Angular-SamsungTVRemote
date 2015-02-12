@@ -18,6 +18,7 @@ var browserApi = function () {
 
         // Validate expected parameters:
         if (!websiteURL) {
+            res.status(400);
             res.json({
                 message: 'Missing Website URL',
                 success: false,
