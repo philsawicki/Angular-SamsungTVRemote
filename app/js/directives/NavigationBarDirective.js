@@ -1,7 +1,10 @@
 'use strict';
 
+/**
+ * "<navigation-bar>" Directive.
+ */
 angular.module('smartTVRemote.Directives')
-	.directive('navigationBar', function() {
+	.directive('navigationBar', function () {
 		return {
 			restrict: 'E',
 			templateUrl: 'views/partial-navigationBar.html',

@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Route Controller
+ * Route Controller.
  */
 angular.module('smartTVRemote.Controllers')
 	.controller('RouteController', ['$scope', '$route', '$location', function ($scope, $route, $location) {

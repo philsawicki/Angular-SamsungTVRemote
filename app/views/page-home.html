@@ -12,24 +12,16 @@
 <!-- Example row of columns -->
 <div class="row text-center">
 	<div class="col-md-3">
-		<h2>Volume Up</h2>
-		<p>Or &uparrow; on keyboard</p>
-		<p><a class="btn btn-primary" href="javascript:;" role="button" id="volumeUp">Volume Up &raquo;</a></p>
+		<tv-command title="Volume Up" cta-title="Volume Up" keyboard-shortcut="&uparrow;" key-code="38" command="KEY_VOLUP"></tv-command>
 	</div>
 	<div class="col-md-3">
-		<h2>Volume Down</h2>
-		<p>Or &downarrow; on keyboard</p>
-		<p><a class="btn btn-primary" href="javascript:;" role="button" id="volumeDown">Volume Down &raquo;</a></p>
+		<tv-command title="Volume Down" cta-title="Volume Down" keyboard-shortcut="&downarrow;" key-code="40" command="KEY_VOLDOWN"></tv-command>
 	</div>
 	<div class="col-md-3">
-		<h2>Channel Up</h2>
-		<p>Or &rightarrow; on keyboard</p>
-		<p><a class="btn btn-primary" href="javascript:;" role="button" id="channelUp">Channel Up &raquo;</a></p>
+		<tv-command title="Channel Up" cta-title="Channel Up" keyboard-shortcut="&rightarrow;" key-code="39" command="KEY_CHUP"></tv-command>
 	</div>
 	<div class="col-md-3">
-		<h2>Channel Down</h2>
-		<p>Or &leftarrow; on keyboard</p>
-		<p><a class="btn btn-primary" href="javascript:;" role="button" id="channelDown">Channel Down &raquo;</a></p>
+		<tv-command title="Channel Down" cta-title="Channel Down" keyboard-shortcut="&leftarrow;" key-code="37" command="KEY_CHDOWN"></tv-command>
 	</div>
 
 	<!-- Select a Command to send to the SmartTV front the list of supported Commands: -->
@@ -128,45 +120,45 @@
 				 * Extremely basic handler for the "Volume Up" button.
 				 * @return {void}
 				 */
-				volumeUpCallback: function () {
-					remoteMediator.execute({
-						command: 'KEY_VOLUP',
-						elementToDisable: '#volumeUp'
-					});
-				},
+				//volumeUpCallback: function () {
+				//	remoteMediator.execute({
+				//		command: 'KEY_VOLUP',
+				//		elementToDisable: '#volumeUp'
+				//	});
+				//},
 
 				/**
 				 * Extremely basic handler for the "Volume Down" button.
 				 * @return {void}
 				 */
-				volumeDownCallback: function () {
-					remoteMediator.execute({
-						command: 'KEY_VOLDOWN',
-						elementToDisable: '#volumeDown'
-					});
-				},
+				//volumeDownCallback: function () {
+				//	remoteMediator.execute({
+				//		command: 'KEY_VOLDOWN',
+				//		elementToDisable: '#volumeDown'
+				//	});
+				//},
 
 				/**
 				 * Extremely basic handler for the "Channel Up" button.
 				 * @return {void}
 				 */
-				channelUpCallback: function () {
-					remoteMediator.execute({
-						command: 'KEY_CHUP',
-						elementToDisable: '#channelUp'
-					});
-				},
+				//channelUpCallback: function () {
+				//	remoteMediator.execute({
+				//		command: 'KEY_CHUP',
+				//		elementToDisable: '#channelUp'
+				//	});
+				//},
 
 				/**
 				 * Extremely basic handler for the "Channel Down" button.
 				 * @return {void}
 				 */
-				channelDownCallback: function () {
-					remoteMediator.execute({
-						command: 'KEY_CHDOWN',
-						elementToDisable: '#channelDown'
-					});
-				},
+				//channelDownCallback: function () {
+				//	remoteMediator.execute({
+				//		command: 'KEY_CHDOWN',
+				//		elementToDisable: '#channelDown'
+				//	});
+				//},
 
 				/**
 				 * Send a custom Command to the Remote.
@@ -181,12 +173,15 @@
 			};
 
 
+			/*
 			// Register callbacks for CTA button clicks:
 			$('#volumeUp').on('click', remoteActions.volumeUpCallback);
 			$('#volumeDown').on('click', remoteActions.volumeDownCallback);
 			$('#channelUp').on('click', remoteActions.channelUpCallback);
 			$('#channelDown').on('click', remoteActions.channelDownCallback);
-
+			*/
+			
+			/*
 			// Register callbacks for keypress events:
 			$('html').keydown(function (event) {
 				switch (event.keyCode) {
@@ -211,7 +206,8 @@
 						break;
 				}
 			});
-
+			*/
+			
 			// Register callback for the "Available Commands" select:
 			$('#sendCommand').on('click', function (event) {
 				var selectedCommand = $('#commandSelect').find('option:selected').val();

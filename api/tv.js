@@ -90,8 +90,7 @@ var tvApi = function () {
 
         // Validate expected parameters:
         if (!tvLocationUrl) {
-            res.status(400);
-            res.json({
+            res.status(400).json({
                 message: 'Missing TV Location URL',
                 success: false,
                 error: true,
@@ -134,8 +133,7 @@ var tvApi = function () {
 
         // Validate expected parameters:
         if (!tvControlUrl) {
-            res.status(400);
-            res.json({
+            res.status(400).json({
                 message: 'Missing TV Control URL',
                 success: false,
                 error: true,
@@ -270,8 +268,7 @@ var tvApi = function () {
 
         // Validate expected parameters:
         if (!commandID) {
-            res.status(400);
-            res.json({
+            res.status(400).json({
                 message: 'Missing TV Command',
                 success: false,
                 error: true,
