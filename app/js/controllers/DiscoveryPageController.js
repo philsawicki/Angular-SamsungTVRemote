@@ -103,6 +103,10 @@ angular.module('smartTVRemote.Controllers')
 
 					// Re-fetch the list of connected SmartTVs:
 					getSmartTVs();
+
+
+					// Print TV details to the console (for debugging purposes);
+					$scope.getTVDetails(tvDevice);
 				}
 			};
 		}

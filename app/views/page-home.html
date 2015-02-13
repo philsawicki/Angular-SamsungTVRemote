@@ -5,7 +5,7 @@
 
 <!-- Show message is the app is offline (hide container by default): -->
 <div class="alert alert-warning fade-in fade-out ng-cloak" role="alert" ng-hide="tvIPSaved">
-	<strong>TV not connected.</strong> You have not connected with a SmartTV yet. Check the <a href="#/discovery"><em>Discovery</em></a> page to associate with a device.
+	<strong>TV not connected.</strong> You have not connected with a SmartTV yet. Check the <a href="#/discovery" class="alert-link">Discovery page</a> to associate with a device.
 </div>
 
 
@@ -23,30 +23,43 @@
 	<div class="col-md-3">
 		<tv-command title="Channel Down" cta-title="Channel Down" keyboard-shortcut="&leftarrow;" key-code="37" command="KEY_CHDOWN"></tv-command>
 	</div>
-
-	<!-- Select a Command to send to the SmartTV front the list of supported Commands: -->
-	<div class="col-md-12">
-		<form class="form-inline">
-			<div class="form-group">
-				<label for="commandSelect">Available Command:</label>
-				<select id="commandSelect">
-					<option ng-repeat="supportedCommand in supportedCommands">{{ ::supportedCommand }}</option>
-				</select>
-				<button id="sendCommand" type="submit" class="btn btn-primary">Send Command</button>
-			</div>
-		</form>
-	</div>
 </div>
+
+
+
+<!-- Select a Command to send to the SmartTV front the list of supported Commands: -->
+<div class="row">
+	<div class="col-md-12">
+		<div class="input-group">
+			<select id="commandSelect" class="form-control" >
+				<option ng-repeat="supportedCommand in supportedCommands">{{ ::supportedCommand }}</option>
+			</select>
+			<span class="input-group-btn">
+				<button id="sendCommand" type="submit" class="btn btn-primary">Send Command</button>
+			</span>
+		</div><!-- /input-group -->
+	</div><!-- /.col-md-12 -->
+</div><!-- /.row -->
+
 
 <!-- Success/Error Infoboxes -->
-<div id="successInfobox" class="alert alert-success alert-dismissible" role="alert">
-	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	<strong>Success!</strong> <span class="message"></span>
-</div>
-<div id="errorInfobox" class="alert alert-danger alert-dismissible" role="alert">
-	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	<strong>Warning!</strong> <span class="message"></span>
-</div>
+<div class="row">
+	<div class="col-md-12">
+		<p>
+			<div id="successInfobox" class="alert alert-success alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<strong>Success!</strong> <span class="message"></span>
+			</div>
+		</p>
+
+		<p>
+			<div id="errorInfobox" class="alert alert-danger alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<strong>Warning!</strong> <span class="message"></span>
+			</div>
+		</p>
+	</div><!-- /.col-md-12 -->
+</div><!-- /.row -->
 <!-- /Success/Error Infoboxes -->
 
 
