@@ -51,7 +51,7 @@ var discoveryApi = function () {
         // Wait a few seconds while waiting for responses:
         setTimeout(function () {
             res.json(responses);
-        }, 1*1000);
+        }, 2*1000);
     };
 
 

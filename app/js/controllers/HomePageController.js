@@ -4,8 +4,19 @@
  * Home Page Controller.
  */
 angular.module('smartTVRemote.Controllers')
-	.controller('HomePageController', ['$scope', '$timeout', 'tvRemoteService', 
-		function ($scope, $timeout, tvRemoteService) {
+	.controller('HomePageController', ['$scope', '$timeout', 'tvRemoteService', 'applicationStorageService',
+		function ($scope, $timeout, tvRemoteService, applicationStorageService) {
+			/**
+			 * Check if there is a TV IP save in the Storage Service.
+			 * @type {bool}
+			 */
+			var tvIP = applicationStorageService.getConnectedTVIP();
+			if (tvIP) {
+				$scope.tvIPSaved = true;
+			} else {
+				$scope.tvIPSaved = false;
+			}
+
 			/**
 			 * Delay the fetching of data until at least the document has loaded, else 
 			 * there will be a delay before drawing (other) elements & directives to 

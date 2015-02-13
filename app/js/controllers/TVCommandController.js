@@ -4,8 +4,8 @@
  * TV Command Directive Controller.
  */
 angular.module('smartTVRemote.Controllers')
-	.controller('TVCommandController', ['$scope', '$element', '$document', 'tvRemoteService', 
-		function ($scope, $element, $document, tvRemoteService) {
+	.controller('TVCommandController', ['$scope', '$element', '$document', 'tvRemoteService', 'applicationStorageService',
+		function ($scope, $element, $document, tvRemoteService, applicationStorageService) {
 			var successInfobox = $('#successInfobox'),
 			    errorInfobox = $('#errorInfobox'),
 			    elementToDisable = $element.find('.js-remote-command-button');
@@ -32,7 +32,10 @@ angular.module('smartTVRemote.Controllers')
 			$scope.executeCommand = function () {
 				elementToDisable.prop('disabled', false);
 				
-				tvRemoteService.sendRemoteCommand(undefined, $scope.command)
+				// Get the TV IP from storage:
+				var tvIP = applicationStorageService.getConnectedTVIP();
+
+				tvRemoteService.sendRemoteCommand(tvIP, $scope.command)
 					.then(
 						function success (data) {
 							if (data.success) {
@@ -52,11 +55,11 @@ angular.module('smartTVRemote.Controllers')
 							elementToDisable.prop('disabled', false);
 						},
 						function error (reason) {
-							errorInfobox.find('.message').text( JSON.stringify(err) );
+							errorInfobox.find('.message').text( JSON.stringify(reason) );
 							errorInfobox.show();
 							successInfobox.hide();
 
-							console.error(err);
+							console.error(reason);
 
 							elementToDisable.prop('disabled', false);
 						}

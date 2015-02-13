@@ -32,7 +32,9 @@ gulp.task('package-partials', function() {
 gulp.task('minify-js', ['package-partials'], function() {
     // Library references (order-dependent):
     var libs = [
+        // Libraries:
         './lib/x2js-v1.1.5/xml2json.js',
+
         //'./app/bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js',
         //'./app/bower_components/jquery/dist/jquery.js',
         //'./app/bower_components/angular/angular.js',
@@ -43,6 +45,7 @@ gulp.task('minify-js', ['package-partials'], function() {
         //'./app/bower_components/d3/d3.min.js',
         //'./app/bower_components/jquery-mockjax/jquery.mockjax.js'
         
+        // Application scripts:
         './app/js/**/*.js',
         './tmp/templates.js'
     ];
@@ -60,19 +63,22 @@ gulp.task('minify-js', ['package-partials'], function() {
  * Minify CSS files, rewrite relative paths of Bootstrap fonts & copy Bootstrap fonts.
  */
 gulp.task('minify-css', function() {
-    var bowerCss = gulp.src('app/bower_components/bootstrap/dist/css/bootstrap.min.css')
+    var bootstrapBaseCSS = gulp.src('app/bower_components/bootstrap/dist/css/bootstrap.min.css')
             .pipe(replace(/url\((')?\.\.\/fonts\//g, 'url($1fonts/')),
-        appCss = gulp.src('app/css/*.css'),
+        bootstrapThemeCSS = gulp.src('app/bower_components/bootstrap/dist/css/bootstrap-theme.min.css'),
+        applicationCSS = gulp.src('app/css/*.css'),
         combinedStream = cs.create(),
         fontFiles = gulp.src('./app/bower_components/bootstrap/fonts/*', { base: './app/bower_components/bootstrap/' });
 
-    combinedStream.append(bowerCss);
-    combinedStream.append(appCss);
-    var combinedCss = combinedStream
+    combinedStream.append(bootstrapBaseCSS);
+    combinedStream.append(bootstrapThemeCSS);
+    combinedStream.append(applicationCSS);
+
+    var combinedCSS = combinedStream
             .pipe(minifyCSS({ cache: true, keepSpecialComments: 0, advanced: true }))
             .pipe(concat('css.css'));
 
-    return es.concat(combinedCss, fontFiles)
+    return es.concat(combinedCSS, fontFiles)
         .pipe(gulp.dest('./dist/css/'));
 });
 

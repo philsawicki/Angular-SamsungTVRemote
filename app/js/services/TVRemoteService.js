@@ -14,7 +14,7 @@ angular.module('smartTVRemote.Services')
 				var timeoutCountdown = undefined;
 				
 				var url = '//localhost:8080/api/tv/command/'
-					+ (typeof tvIP === 'undefined' ? '' : tvIP + '/')
+					+ (tvIP === null || typeof tvIP === 'undefined' ? '' : tvIP + '/')
 					+ command;
 				
 				$http.get(url, {

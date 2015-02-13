@@ -1,13 +1,13 @@
-<h1>Home</h1>
-
-<div>
-	Home Page for <em>SmartTV Remote</em>
-</div>
-
-
 <div class="page-header">
-	<h2>TV Remote Demo</h2>
+	<h1>TV Remote Demo</h1>
 </div>
+
+
+<!-- Show message is the app is offline (hide container by default): -->
+<div class="alert alert-warning fade-in fade-out ng-cloak" role="alert" ng-hide="tvIPSaved">
+	<strong>TV not connected.</strong> You have not connected with a SmartTV yet. Check the <a href="#/discovery"><em>Discovery</em></a> page to associate with a device.
+</div>
+
 
 <!-- Example row of columns -->
 <div class="row text-center">

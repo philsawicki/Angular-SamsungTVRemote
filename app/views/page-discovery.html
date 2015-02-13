@@ -17,9 +17,9 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="tvDevice in tvDevices">
-			<th scope="row">{{ ::($index + 1) }}</th>
-			<td ng-click="getTVDetails(tvDevice)">{{ ::tvDevice.headers }}</td>
+		<tr ng-repeat="tvDevice in tvDevices" ng-class="{ success: tvDevice.headersParsed['LOCATION'].indexOf(associatedTVIP) !== -1 }">
+			<th scope="row">{{ ($index + 1) }}</th>
+			<td ng-click="saveTVIP(tvDevice)">{{ tvDevice.headers }}</td>
 		</tr>
 	</tbody>
 </table>

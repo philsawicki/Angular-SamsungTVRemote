@@ -76,7 +76,7 @@ var tvApi = function () {
         // Wait a few seconds while waiting for SSDP responses:
         setTimeout(function () {
             res.json(SSDPResponses);
-        }, 1*1000);
+        }, 2*1000);
     };
 
     /**
