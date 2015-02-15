@@ -17,10 +17,12 @@ angular.module('smartTVRemote.Controllers')
 						$scope.tvDevices = data;
 					},
 					function error (reason) {
+						$scope.tvDevices = [];
 						console.error(reason);
 					}
 				);
 			};
+			$scope.tvDevices = null;
 			getSmartTVs();
 
 			/**
@@ -34,10 +36,12 @@ angular.module('smartTVRemote.Controllers')
 						$scope.devices = data;
 					},
 					function error (reason) {
+						$scope.devices = [];
 						console.error(reason);
 					}
 				);
 			};
+			$scope.devices = null;
 			getAllDevices();
 
 			/**

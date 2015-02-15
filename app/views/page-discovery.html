@@ -21,8 +21,11 @@
 			<th scope="row">{{ ($index + 1) }}</th>
 			<td ng-click="saveTVIP(tvDevice)">{{ tvDevice.headers }}</td>
 		</tr>
-		<tr ng-hide="tvDevices.length > 0">
+		<tr ng-show="tvDevices === null">
 			<td colspan="2" class="text-center"><strong>Scanning network...</strong></td>
+		</tr>
+		<tr ng-show="tvDevices.length === 0">
+			<td colspan="2" class="text-center"><strong>No TV found.</strong></td>
 		</tr>
 	</tbody>
 </table>
@@ -44,8 +47,11 @@
 			<th scope="row">{{ ::($index + 1) }}</th>
 			<td>{{ ::device.headers }}</td>
 		</tr>
-		<tr ng-hide="devices.length > 0">
+		<tr ng-show="devices === null">
 			<td colspan="2" class="text-center"><strong>Scanning network...</strong></td>
+		</tr>
+		<tr ng-show="devices.length === 0">
+			<td colspan="2" class="text-center"><strong>No device found.</strong></td>
 		</tr>
 	</tbody>
 </table>
