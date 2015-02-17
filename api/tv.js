@@ -72,6 +72,7 @@ var tvApi = function () {
         // Search for a service type:
         //client.search('urn:samsung.com:service:MultiScreenService:1');
         client.search('urn:samsung.com:device:RemoteControlReceiver:1');
+        //client.search('urn:schemas-upnp-org:service:RenderingControl:1');
 
         // Wait a few seconds while waiting for SSDP responses:
         setTimeout(function () {
@@ -111,7 +112,7 @@ var tvApi = function () {
                 res.end();
             });
         }).on('error', function (error) {
-            res.json({
+            res.status(500).json({
                 message: 'Error.',
                 success: false,
                 error: true,
@@ -362,6 +363,126 @@ var tvApi = function () {
         res.end();
     };
 
+    var getVolume = function (req, res) {
+        var tvHost = req.params.host;
+        var tvPort = req.params.port || 52235;
+
+
+        var body = '<s:Envelope s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><ns0:GetVolume xmlns:ns0="urn:schemas-upnp-org:service:RenderingControl:1"><InstanceID>0</InstanceID><Channel>Master</Channel></ns0:GetVolume></s:Body></s:Envelope>';
+
+        var postRequest = {
+            host: tvHost,
+            path: '/smp_14_', //'/upnp/control/RenderingControl1',
+            port: 7676,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/xml;charset="utf-8"',
+                //'User-Agent': 'DLNADOC/1.50 SEC_HHP_GT-P1000/1.0', //'NodeJS Samsung Remote', //'DLNADOC/1.50 SEC_HHP_GT-P1000/1.0', (Samsung Galaxy Tab)
+                'SOAPACTION': '"urn:schemas-upnp-org:service:RenderingControl:1#GetVolume"',
+                'Connection': 'Close',
+                'Content-Length': Buffer.byteLength(body)
+            }
+        };
+
+        var buffer = '';
+
+        var tvReq = _http.request(postRequest, function (tvRes) {
+            console.log('STATUS: ' + tvRes.statusCode);
+            console.log('HEADERS: ' + JSON.stringify(tvRes.headers));
+            tvRes.setEncoding('utf8');
+
+            tvRes.on('data', function (data) {
+                buffer += data;
+            });
+            tvRes.on('error', function (error) {
+                res.status(500).write(error);
+            });
+            tvRes.on('end', function (data) {
+                console.log('BODY: "' + buffer + '"');
+                res.write(buffer);
+                res.end();
+            });
+        }).on('error', function (error) {
+            res.status(500).json({
+                message: 'Error.',
+                success: false,
+                error: true,
+                errorMessage: error
+            });
+        });;
+
+        tvReq.write(body);
+        tvReq.end();
+    };
+
+    var setVolume = function (req, res) {
+        var tvHost = req.params.host;
+        var tvPort = req.params.port || 52235;
+        var tvVolume = req.params.volume;
+
+
+        // Validate expected parameters:
+        if (!tvVolume) {
+            res.status(400).json({
+                message: 'Missing Volume',
+                success: false,
+                error: true,
+                errorMessage: 'Missing Volume'
+            });
+        } else if (tvVolume < 0 || tvVolume > 100) {
+            res.status(400).json({
+                message: 'Volume out of bounds',
+                success: false,
+                error: true,
+                errorMessage: 'Volume out of bounds'
+            });
+        }
+
+
+        var body = ''
+            + '<?xml version="1.0" encoding="utf-8"?>'
+            +    '<s:Envelope s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">'
+            +       '<s:Body>'
+            +          '<ns0:SetVolume xmlns:ns0="urn:schemas-upnp-org:service:RenderingControl:1">'
+            +             '<InstanceID>0</InstanceID>'
+            +             '<Channel>Master</Channel>'
+            +             '<InstanceID>0</InstanceID>'
+            +             '<DesiredVolume>' + tvVolume + '</DesiredVolume>'
+            +          '</ns0:SetVolume>'
+            +       '</s:Body>'
+            +    '</s:Envelope>';
+
+        var postRequest = {
+            host: tvHost,
+            path: '/upnp/control/RenderingControl1',
+            port: tvPort,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/xml;charset="utf-8"',
+                'Content-Length': Buffer.byteLength(body),
+                'User-Agent': 'DLNADOC/1.50 SEC_HHP_GT-P1000/1.0', //'NodeJS Samsung Remote', //'DLNADOC/1.50 SEC_HHP_GT-P1000/1.0', (Samsung Galaxy Tab)
+                'SOAPACTION': '"urn:schemas-upnp-org:service:RenderingControl:1#SetVolume"'
+            }
+        };
+
+        var buffer = '';
+
+        var tvReq = _http.request(postRequest, function (tvRes) {
+            tvRes.setEncoding('utf8');
+
+            tvRes.on('data', function (data) {
+                buffer += data;
+            });
+            tvRes.on('end', function (data) {
+                res.write(buffer);
+                res.end();
+            });
+        });
+
+        tvReq.write(body);
+        tvReq.end();
+    };
+
 
     return {
         configureRemote: configureRemote,
@@ -371,7 +492,10 @@ var tvApi = function () {
         getSupportedCommands: getSupportedCommands,
         details: details,
         detailsForSpecificTV: detailsForSpecificTV,
-        getDTVInformation: getDTVInformation
+        getDTVInformation: getDTVInformation,
+
+        getVolume: getVolume,
+        setVolume: setVolume
     };
 }();
 

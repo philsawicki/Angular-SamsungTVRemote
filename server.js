@@ -86,6 +86,12 @@ router.route('/tv/details/:tvLocationUrl')
 router.route('/tv/GetDTVInformation/:host/:port/:tvControlUrl')
     .get( tvAPI.getDTVInformation )
     .post( tvAPI.getDTVInformation );
+router.route('/tv/GetVolume/:host/:port?')
+    .get( tvAPI.getVolume )
+    .post( tvAPI.getVolume );
+router.route('/tv/SetVolume/:host/:port?/:volume')
+    .get( tvAPI.setVolume )
+    .post( tvAPI.setVolume );
 router.route('/tv/commands')
     .get( tvAPI.getSupportedCommands );
 router.route('/tv/command/:tvIP?/:commandID')

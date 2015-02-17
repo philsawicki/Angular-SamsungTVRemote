@@ -268,6 +268,68 @@ angular.module('smartTVRemote.Services')
 
 				return deferred.promise;
 			};
+
+			/**
+			 * Gets the current volume of the connected SmartTV.
+			 * @param {string} tvHost The SmartTV Host (eg: "192.168.2.13").
+			 * @return {Deferred.promise} A promise to be resolved when the request is successfully received.
+			 */
+			var getVolume = function (tvHost) {
+				var deferred = $q.defer();
+				var timeoutPromise = $q.defer();
+				var requestTimedOut = false;
+				var timeoutCountdown = undefined;
+				
+				var url = '//localhost:8080/api/tv/GetVolume/'
+					+ (tvHost === null || typeof tvHost === 'undefined' ? '' : tvHost);
+				
+				$http.get(url, {
+					timeout: timeoutPromise.promise,
+					cache: false // Do not cache the results, as we always want the latest data
+				})
+					.success(function (data) {
+						if (data.length === 0) {
+							// Fail the request, as no data has been received:
+							deferred.reject({
+								error: errorMessages.NoData.Error,
+								message: errorMessages.NoData.Message
+							});
+						} else {
+							// Parse & format the data received:
+							// ...
+						}
+						
+
+						// Cancel the "timeout" $timeout:
+						$timeout.cancel(timeoutCountdown);
+						// Cancel the "timeout" Promise:
+						timeoutPromise.reject();
+
+						
+						// Resolve the Promise with data:
+						deferred.resolve(data);
+					})
+					.error(function (data) {
+						if (requestTimedOut) {
+							deferred.reject({
+								error: errorMessages.Timeout.Error,
+								message: errorMessages.Timeout.Message.format(appConfig.JSONTimeout),
+								data: data
+							});
+						} else {
+							deferred.reject(data);
+						}
+					});
+
+
+				// Start a $timeout which, if resolved, will fail the $http request sent (and assume a timeout):
+				timeoutCountdown = $timeout(function () {
+					requestTimedOut = true;
+					timeoutPromise.resolve();
+				}, appConfig.JSONTimeout);
+
+				return deferred.promise;
+			};
 			
 
 			// Return the public interface for the service:
@@ -275,7 +337,9 @@ angular.module('smartTVRemote.Services')
 				sendRemoteCommand: sendRemoteCommand,
 				getSmartTVCommands: getSmartTVCommands,
 				getTVServices: getTVServices,
-				getDTVInformation: getDTVInformation
+				getDTVInformation: getDTVInformation,
+
+				getVolume: getVolume
 			};
 		}
 	]);

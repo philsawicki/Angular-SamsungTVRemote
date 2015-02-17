@@ -33,6 +33,16 @@ angular.module('smartTVRemote.Controllers')
 						$scope.supportedCommands = [];
 					}
 				);
+
+				// Get volume of the commected SmartTV:
+				var volumePromise = tvRemoteService.getVolume(tvIP);
+				volumePromise.then(
+					function success (data) {
+						console.log(data);
+					},
+					function error (reason) {
+						console.log(reason);
+					})
 			}, 100);
 		}
 	]);
