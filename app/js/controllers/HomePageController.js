@@ -4,8 +4,8 @@
  * Home Page Controller.
  */
 angular.module('smartTVRemote.Controllers')
-	.controller('HomePageController', ['$scope', '$timeout', 'tvRemoteService', 'applicationStorageService',
-		function ($scope, $timeout, tvRemoteService, applicationStorageService) {
+	.controller('HomePageController', ['$scope', '$timeout', 'tvRemoteService', 'discoveryService', 'applicationStorageService',
+		function ($scope, $timeout, tvRemoteService, discoveryService, applicationStorageService) {
 			/**
 			 * Check if there is a TV IP save in the Storage Service.
 			 * @type {bool}
@@ -16,6 +16,35 @@ angular.module('smartTVRemote.Controllers')
 			} else {
 				$scope.tvIPSaved = false;
 			}
+
+
+			// Get details about the connected SmartTV:
+			var smartTVsPromise = discoveryService.getConnectedSamsungSmartTVs();
+			smartTVsPromise.then(
+				function success (data) {
+					var tvDevice = data[0];
+					if (tvDevice.headersParsed && tvDevice.headersParsed['LOCATION']) {
+						var location = tvDevice.headersParsed['LOCATION'];
+
+						// Get SmartTVs supported SOAP operations:
+						var supportedSOAPOperationsPromise = tvRemoteService.getTVServices(location);
+						supportedSOAPOperationsPromise.then(
+							function success (xmlData) {
+								$scope.tvFriendlyName = xmlData.root.device.friendlyName;
+								$scope.tvModelName = xmlData.root.device.modelName;
+							},
+							function error (reason) {
+								console.error(reason);
+							}
+						);
+					}
+
+				},
+				function error (reason) {
+					console.error(reason);
+				}
+			);
+			
 
 			/**
 			 * Delay the fetching of data until at least the document has loaded, else 
