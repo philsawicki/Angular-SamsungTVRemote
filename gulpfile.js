@@ -13,7 +13,8 @@ var gulp = require('gulp'),
     htmlReplace = require('gulp-html-replace'),
     templateCache = require('gulp-angular-templatecache'),
     minifyCSS = require('gulp-minify-css'),
-    minifyHTML = require('gulp-minify-html');
+    minifyHTML = require('gulp-minify-html'),
+    uncss = require('gulp-uncss');
 
 
 /**
@@ -75,8 +76,11 @@ gulp.task('minify-css', function() {
     combinedStream.append(applicationCSS);
 
     var combinedCSS = combinedStream
-            .pipe(minifyCSS({ cache: true, keepSpecialComments: 0, advanced: true }))
-            .pipe(concat('css.css'));
+        .pipe(uncss({
+            html: ['./app/index.html', './app/views/**/*.html']
+        }))
+        .pipe(minifyCSS({ cache: true, keepSpecialComments: 0, advanced: true }))
+        .pipe(concat('css.css'));
 
     return es.concat(combinedCSS, fontFiles)
         .pipe(gulp.dest('./dist/css/'));
