@@ -10,8 +10,8 @@ module.exports = function (config) {
         files: [
             'app/bower_components/angular/angular.js',
             'app/bower_components/angular-mocks/angular-mocks.js',
-            'app/components/**/*.js',
-            'app/view*/**/*.js',
+            //'app/components/**/*.js',
+            //'app/view*/**/*.js',
 
             'app/bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js',
             'app/bower_components/jquery/dist/jquery.js',
@@ -28,7 +28,12 @@ module.exports = function (config) {
         exclude: [],
 
         // Test result reporters to use:
-        reporters: ['progress'],
+        reporters: ['progress', 'coverage'],
+
+        // Source files for 'coverage' processing (do not include tests or librairies):
+        preprocessors: {
+            'app/js/**/*.js': ['coverage']
+        },
 
         // Enable/disable colors in the output (for reporters and logs):
         colors: true,
@@ -39,12 +44,31 @@ module.exports = function (config) {
         // Browsers in which to run the tests:
         browsers: ['Chrome'],
 
+        // Karma plugins:
         plugins: [
             'karma-chrome-launcher',
             'karma-firefox-launcher',
             'karma-jasmine',
-            'karma-junit-reporter'
+            'karma-junit-reporter',
+            'karma-coverage'
         ],
+
+        // Configure the reporters:
+        coverageReporter: {
+            dir: 'build/reports/coverage', // Common output directory
+            reporters: [
+                // Reporters not supporting the 'file' property:
+                { type: 'html', subdir: 'report-html' },
+                //{ type: 'lcov', subdir: 'report-lcov' },
+                // Reporter supporting the 'file' property, using 'subdir' 
+                // to directly output them in the 'dir' directory:
+                //{ type: 'cobertura', subdir: '.', file: 'covertura.txt' },
+                //{ type: 'lcovonly', subdir: '.', file: 'report-lcovonly.txt' },
+                //{ type: 'teamcity', subdir: '.', file: 'teamcity.txt' },
+                //{ type: 'text', subdir: '.', file: 'text.txt' },
+                //{ type: 'text-summary', subdir: '.', file: 'text-summary.txt' }
+            ]
+        },
 
         junitReporter: {
             outputFile: 'test_out/unit.xml',
