@@ -53,7 +53,7 @@ module.exports = function (config) {
             'karma-coverage'
         ],
 
-        // Configure the reporters:
+        // Configuration for the "coverage" reporter:
         coverageReporter: {
             dir: 'build/reports/coverage', // Common output directory
             reporters: [
@@ -70,6 +70,7 @@ module.exports = function (config) {
             ]
         },
 
+        // Configuration for the "JUnit" reporter:
         junitReporter: {
             outputFile: 'test_out/unit.xml',
             suite: 'unit'

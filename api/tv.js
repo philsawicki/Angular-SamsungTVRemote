@@ -8,6 +8,12 @@
 var tvApi = function () {
 
     /**
+     * Include "Q" library.
+     * @type {Q}
+     */
+    var Q = require('q');
+
+    /**
      * Samsung Remote.
      * @type {SamsungRemote|undefined}
      */
@@ -38,46 +44,17 @@ var tvApi = function () {
      * @return {void}
      */
     var discovery = function (req, res) {
-        var SSDPClient = require('node-ssdp').Client,
-            client = new SSDPClient(),
-            SSDPResponses = [];
+        var DiscoveryService = require('./services/discoveryService');
 
-        client.on('response', function (headers, statusCode, rinfo) {
-            // Split on line breaks ("/r/n"):
-            var headersFormatted = headers.split( String.fromCharCode(13, 10) );
-            
-            // Extract the headers:
-            var headersParsed = {};
-            for (var i = 0, nbHeaders = headersFormatted.length; i < nbHeaders; i++) {
-                var item = headersFormatted[i];
-
-                var firstColonIndex = item.indexOf(':');
-                if (firstColonIndex > -1) {
-                    var key = item.substring(0, firstColonIndex);
-                    var value = item.substring(firstColonIndex + 1, item.length).trim();
-
-                    headersParsed[key] = value;
-                }
+        DiscoveryService.getAllSamsungSmartTVs()
+        .then(
+            function success (data) {
+                res.json(data);
+            },
+            function error (reason) {
+                res.status(500).json(reason);
             }
-
-            SSDPResponses.push({
-                headers: headers,
-                headersFormatted: headersFormatted,
-                headersParsed: headersParsed,
-                statusCode: statusCode,
-                rinfo: rinfo
-            });
-        });
-
-        // Search for a service type:
-        //client.search('urn:samsung.com:service:MultiScreenService:1');
-        client.search('urn:samsung.com:device:RemoteControlReceiver:1');
-        //client.search('urn:schemas-upnp-org:service:RenderingControl:1');
-
-        // Wait a few seconds while waiting for SSDP responses:
-        setTimeout(function () {
-            res.json(SSDPResponses);
-        }, 2*1000);
+        );
     };
 
     /**
@@ -100,7 +77,6 @@ var tvApi = function () {
         }
 
 
-        //var http = require('http');
         _http.get(tvLocationUrl, function (xmlRes) {
             var buffer = '';
 
@@ -158,7 +134,6 @@ var tvApi = function () {
             }
         };
 
-        //var http = require('http');
         var buffer = '';
 
         var tvReq = _http.request(postRequest, function (tvRes) {
@@ -323,7 +298,6 @@ var tvApi = function () {
             }
         };
 
-        //var http = require('http');
         var buffer = '';
 
         var tvReq = _http.request(postRequest, function (tvRes) {

@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "gulp-uncss": "^1.0.0",
-    "karma-coverage": "^0.2.7"
+    "karma-coverage": "^0.2.7",
+    "q": "^1.1.2"
   }
 }
