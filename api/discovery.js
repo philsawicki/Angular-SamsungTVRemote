@@ -9,9 +9,9 @@
 var DiscoveryEndpoint = function () {
 
     /**
-     * Include "Q" library.
+     * Include the "DiscoveryService" library.
      * 
-     * @type {Q}
+     * @type {DiscoveryService}
      * @private
      */
     var DiscoveryService = require('./services/discoveryService');

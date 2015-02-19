@@ -25,6 +25,18 @@ var tvApi = function () {
      */
     var _http = require('http');
 
+    /**
+     * Discovery Service.
+     * @type {DiscoveryService}
+     */
+    var DiscoveryService = require('./services/discoveryService');
+
+    /**
+     * TV Service.
+     * @type {TVService}
+     */
+    var TVService = require('./services/tvService');
+
 
     /**
      * Configure the Samsung Remote
@@ -44,8 +56,6 @@ var tvApi = function () {
      * @return {void}
      */
     var discovery = function (req, res) {
-        var DiscoveryService = require('./services/discoveryService');
-
         DiscoveryService.getAllSamsungSmartTVs()
         .then(
             function success (data) {
@@ -76,25 +86,17 @@ var tvApi = function () {
             });
         }
 
-
-        _http.get(tvLocationUrl, function (xmlRes) {
-            var buffer = '';
-
-            xmlRes.on('data', function (data) {
-                buffer += data;
-            });
-            xmlRes.on('end', function (data) {
-                res.write(buffer);
+        
+        DiscoveryService.getDescription(tvLocationUrl)
+        .then(
+            function success (data) {
+                res.write(data);
                 res.end();
-            });
-        }).on('error', function (error) {
-            res.status(500).json({
-                message: 'Error.',
-                success: false,
-                error: true,
-                errorMessage: error
-            });
-        });
+            },
+            function error (reason) {
+                res.status(500).json(reason);
+            }
+        );
     };
 
     /**
@@ -119,37 +121,16 @@ var tvApi = function () {
         }
 
 
-        var body = '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:GetDTVInformation xmlns:u="urn:samsung.com:service:MainTVAgent2:1"></u:GetDTVInformation></s:Body></s:Envelope>';
-
-        var postRequest = {
-            host: tvHost,
-            path: '/smp_4_', // Even tough the "controlURL" can be something like "/smp_8_", the TV seems to only respond when queried through "/smp_4_"...
-            port: tvPort,
-            method: 'POST',
-            headers: {
-                'Content-Type': 'text/xml;charset="utf-8"',
-                'Content-Length': Buffer.byteLength(body),
-                'User-Agent': 'DLNADOC/1.50 SEC_HHP_GT-P1000/1.0', //'NodeJS Samsung Remote', //'DLNADOC/1.50 SEC_HHP_GT-P1000/1.0', (Samsung Galaxy Tab)
-                'SOAPACTION': '"urn:samsung.com:service:MainTVAgent2:1#GetDTVInformation"'
-            }
-        };
-
-        var buffer = '';
-
-        var tvReq = _http.request(postRequest, function (tvRes) {
-            tvRes.setEncoding('utf8');
-
-            tvRes.on('data', function (data) {
-                buffer += data;
-            });
-            tvRes.on('end', function (data) {
-                res.write(buffer);
+        TVService.getDTVInformation(tvHost, tvPort, tvControlUrl)
+        .then(
+            function success (data) {
+                res.write(data);
                 res.end();
-            });
-        });
-
-        tvReq.write(body);
-        tvReq.end();
+            },
+            function error (reason) {
+                res.status(500).json(reason);
+            }
+        );
     };
 
     /**
@@ -334,7 +315,6 @@ var tvApi = function () {
         }
 
         res.json(supportedCommands);
-        res.end();
     };
 
     var getVolume = function (req, res) {

@@ -98,7 +98,7 @@ router.route('/tv/command/:tvIP?/:commandID')
     .get( tvAPI.sendCommand )
     .post( tvAPI.sendCommand );
 
-router.route('/browse/:websiteURL')
+router.route('/browse/:host/:path?/:port?/:websiteURL')
     .get( browserAPI.navigate )
     .post( browserAPI.navigate );
 

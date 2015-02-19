@@ -156,14 +156,7 @@ angular.module('smartTVRemote.Services')
 							});
 						} else {
 							// Parse & format the data received:
-							for (var i = 0, nbTVs = data.length; i < nbTVs; i++) {
-								var connectedTVData = data[i];
-
-								if (connectedTVData.headersParsed && connectedTVData.headersParsed['LOCATION']) {
-									var location = connectedTVData.headersParsed['LOCATION'];
-									console.log('LOCATION', location);
-								}
-							}
+							// ...
 						}
 						
 
