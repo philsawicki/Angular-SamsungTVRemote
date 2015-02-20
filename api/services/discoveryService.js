@@ -104,6 +104,17 @@ var DiscoveryService = function () {
     };
 
     /**
+     * Get all "Rendering Controls" on the network.
+     * 
+     * @param  {Object} options Configuration object for SSDP search (including Timeout delay, etc.).
+     * @return {Deferred.Promise} A promise to be resolved/rejected when results become available.
+     * @public
+     */
+    var getAllRenderingControls = function (options) {
+    	return search('urn:schemas-upnp-org:service:RenderingControl:1', options);
+    };
+
+    /**
      * Return the SmartTV "description.xml" file for the given TV "LOCATION" header.
      * 
      * @param  {string} locationURL The URL of the "description.xml" file.
@@ -134,6 +145,7 @@ var DiscoveryService = function () {
 
         getAllDevices: getAllDevices,
         getAllSamsungSmartTVs: getAllSamsungSmartTVs,
+        getAllRenderingControls: getAllRenderingControls,
 
         getDescription: getDescription
     };

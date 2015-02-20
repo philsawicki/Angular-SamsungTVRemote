@@ -100,7 +100,7 @@ var tvApi = function () {
     };
 
     /**
-     * Return the SmartTV's response to the "GetDTVInformation" request.
+     * Return the SmartTV's response to the "GetDTVInformation" SOAP request.
      * @param  {[type]} req [description]
      * @param  {[type]} res [description]
      * @return {[type]}     [description]
@@ -122,6 +122,74 @@ var tvApi = function () {
 
 
         TVService.getDTVInformation(tvHost, tvPort, tvControlUrl)
+        .then(
+            function success (data) {
+                res.write(data);
+                res.end();
+            },
+            function error (reason) {
+                res.status(500).json(reason);
+            }
+        );
+    };
+
+    /**
+     * Return the SmartTV's response to the "GetAvailableActions" SOAP request.
+     * @param  {[type]} req [description]
+     * @param  {[type]} res [description]
+     * @return {[type]}     [description]
+     */
+    var getAvailableActions = function (req, res) {
+        var tvHost = req.params.host;
+        var tvPort = req.params.port;
+        var tvControlUrl = req.params.tvControlUrl;
+
+        // Validate expected parameters:
+        if (!tvControlUrl) {
+            res.status(400).json({
+                message: 'Missing TV Control URL',
+                success: false,
+                error: true,
+                errorMessage: 'Missing TV Control URL'
+            });
+        }
+
+
+        TVService.getAvailableActions(tvHost, tvPort, tvControlUrl)
+        .then(
+            function success (data) {
+                res.write(data);
+                res.end();
+            },
+            function error (reason) {
+                res.status(500).json(reason);
+            }
+        );
+    };
+
+    /**
+     * Return the SmartTV's response to the "livestream" HTTP request.
+     * @param  {[type]} req [description]
+     * @param  {[type]} res [description]
+     * @return {[type]}     [description]
+     */
+    var livestream = function (req, res) {
+        var tvHost = req.params.host;
+        var tvPort = req.params.port;
+        var tvControlUrl = req.params.tvControlUrl;
+
+        // Validate expected parameters:
+        if (!tvControlUrl) {
+            res.status(400).json({
+                message: 'Missing TV Control URL',
+                success: false,
+                error: true,
+                errorMessage: 'Missing TV Control URL'
+            });
+        }
+
+
+        TVService.livestream(tvHost, tvPort, tvControlUrl)
         .then(
             function success (data) {
                 res.write(data);
@@ -446,7 +514,10 @@ var tvApi = function () {
         getSupportedCommands: getSupportedCommands,
         details: details,
         detailsForSpecificTV: detailsForSpecificTV,
+
         getDTVInformation: getDTVInformation,
+        getAvailableActions: getAvailableActions,
+        livestream: livestream,
 
         getVolume: getVolume,
         setVolume: setVolume
