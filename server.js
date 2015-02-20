@@ -92,6 +92,11 @@ router.route('/tv/GetAvailableActions/:host/:port/:tvControlUrl')
 router.route('/tv/livestream/:host/:port/:tvControlUrl')
     .get( tvAPI.livestream )
     .post( tvAPI.livestream );
+router.route('/tv/subscribe/:host/:port/:tvControlUrl')
+    .get( tvAPI.subscribe )
+    .post( tvAPI.subscribe );
+router.route('/tv/gena/1')
+    .notify( tvAPI.notify );
 router.route('/tv/GetVolume/:host/:port?')
     .get( tvAPI.getVolume )
     .post( tvAPI.getVolume );

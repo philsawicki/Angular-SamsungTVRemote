@@ -202,6 +202,51 @@ var tvApi = function () {
     };
 
     /**
+     * Return the SmartTV's response to the "SUBSCRIBE" HTTP request.
+     * @param  {[type]} req [description]
+     * @param  {[type]} res [description]
+     * @return {[type]}     [description]
+     */
+    var subscribe = function (req, res) {
+        var tvHost = req.params.host;
+        var tvPort = req.params.port;
+        var tvControlUrl = req.params.tvControlUrl;
+
+        // Validate expected parameters:
+        if (!tvControlUrl) {
+            res.status(400).json({
+                message: 'Missing TV Control URL',
+                success: false,
+                error: true,
+                errorMessage: 'Missing TV Control URL'
+            });
+        }
+
+
+        TVService.subscribe(tvHost, tvPort, tvControlUrl)
+        .then(
+            function success (data) {
+                res.write(data);
+                res.end();
+            },
+            function error (reason) {
+                res.status(500).json(reason);
+            }
+        );
+    };
+
+    /**
+     * Return the SmartTV's response to the "NOTIFY" HTTP request.
+     * @param  {[type]} req [description]
+     * @param  {[type]} res [description]
+     * @return {[type]}     [description]
+     */
+    var notify = function (req, res) {
+        console.log('HEADERS = ', req.headers);
+        console.log('BODY = ', JSON.stringify(req.body));
+    };
+
+    /**
      * Return the SmartTV "description.xml" file, listing product information & its specs.
      * @param  {[type]} req [description]
      * @param  {[type]} res [description]
@@ -518,6 +563,8 @@ var tvApi = function () {
         getDTVInformation: getDTVInformation,
         getAvailableActions: getAvailableActions,
         livestream: livestream,
+        subscribe: subscribe,
+        notify: notify,
 
         getVolume: getVolume,
         setVolume: setVolume
