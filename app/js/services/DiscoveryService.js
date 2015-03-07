@@ -6,6 +6,8 @@
 angular.module('smartTVRemote.Services')
 	.factory('discoveryService', ['$q', '$http', '$timeout', 'appConfig', 'errorMessages', 
 		function ($q, $http, $timeout, appConfig, errorMessages) {
+			// URL of the API Server:
+			var APIServer = appConfig.APIServer;
 
 			/**
 			 * Gets the Samsung SmartTVs discovered on the network through UPnP.
@@ -17,7 +19,7 @@ angular.module('smartTVRemote.Services')
 				var requestTimedOut = false;
 				var timeoutCountdown = undefined;
 				
-				var url = '//localhost:8080/api/tv/discovery';
+				var url = APIServer + 'api/tv/discovery';
 				
 				$http.get(url, {
 					timeout: timeoutPromise.promise,
@@ -77,7 +79,7 @@ angular.module('smartTVRemote.Services')
 				var requestTimedOut = false;
 				var timeoutCountdown = undefined;
 				
-				var url = '//localhost:8080/api/discovery/all';
+				var url = APIServer + 'api/discovery/all';
 				
 				$http.get(url, {
 					timeout: timeoutPromise.promise,

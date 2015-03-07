@@ -1,4 +1,12 @@
-<h2>{{ ::title }}</h2>
+<!--<h2>{{ ::title }}</h2>-->
 
-<p>Or <kbd>{{ ::keyboardShortcut }}</kbd> on keyboard</p>
-<p><a class="btn btn-primary js-remote-command-button" role="button" ng-click="executeCommand()">{{ ::ctaTitle }} &raquo;</a></p>
+<p>
+	<!--
+	<a class="btn btn-primary js-remote-command-button" role="button" ng-click="executeCommand()">{{ ::ctaTitle }} &raquo;</a>
+	-->
+	<a class="btn btn-block btn-lg btn-primary  js-remote-command-button" role="button" ng-click="executeCommand()">
+		<span class="glyphicon {{ ::icon }}"></span> {{ ::ctaTitle }}
+	</a>
+</p>
+
+<p class="visible-lg-block">Or <kbd>{{ ::keyboardShortcut }}</kbd> on keyboard</p>

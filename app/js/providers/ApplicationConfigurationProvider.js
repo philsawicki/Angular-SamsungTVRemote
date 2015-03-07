@@ -9,6 +9,7 @@ angular.module('smartTVRemote.Providers')
 
 		// Initial/default config:
 		var appConfig = {
+			APIServer: '//localhost:8080/', // URL of the API/Proxy server
 			JSONPTimeout: 10*1000, // Delay before assuming that a JSONP request failed due to a timeout (in ms)
 			JSONTimeout: 10*1000, // Delay before assuming that a JSON request failed due to a timeout (in ms)
 			StorageKeys: { // Keys to access stored values (currently serialized to "localStorage")

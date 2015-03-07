@@ -76,9 +76,9 @@ gulp.task('minify-css', function() {
     combinedStream.append(applicationCSS);
 
     var combinedCSS = combinedStream
-        .pipe(uncss({
-            html: ['./app/index.html', './app/views/**/*.html']
-        }))
+        //.pipe(uncss({
+        //    html: ['./app/index.html', './app/views/**/*.html']
+        //}))
         .pipe(minifyCSS({ cache: true, keepSpecialComments: 0, advanced: true }))
         .pipe(concat('css.css'));
 

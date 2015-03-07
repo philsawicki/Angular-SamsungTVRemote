@@ -6,14 +6,22 @@
 angular.module('smartTVRemote.Services')
 	.factory('tvRemoteService', ['$q', '$http', '$timeout', 'appConfig', 'errorMessages', 'XMLToJSON',
 		function ($q, $http, $timeout, appConfig, errorMessages, XMLToJSON) {
+			// URL of the API Server:
+			var APIServer = appConfig.APIServer;
 
+			/**
+			 * Send the given Remote command to the connected SmartTV.
+			 * @param {string} tvIP    The IP of the connected SmartTV.
+			 * @param {string} command The command to send to the connected SmartTV (e.g.: "KEY_VOLUP").
+			 * @return {Deferred.promise} A promise to be resolved when the request is successfully received.
+			 */
 			var sendRemoteCommand = function (tvIP, command) {
 				var deferred = $q.defer();
 				var timeoutPromise = $q.defer();
 				var requestTimedOut = false;
 				var timeoutCountdown = undefined;
 				
-				var url = '//localhost:8080/api/tv/command/'
+				var url = APIServer + 'api/tv/command/'
 					+ (tvIP === null || typeof tvIP === 'undefined' ? '' : tvIP + '/')
 					+ command;
 				
@@ -75,7 +83,7 @@ angular.module('smartTVRemote.Services')
 				var requestTimedOut = false;
 				var timeoutCountdown = undefined;
 				
-				var url = '//localhost:8080/api/tv/commands';
+				var url = APIServer + 'api/tv/commands';
 				
 				$http.get(url, {
 					timeout: timeoutPromise.promise,
@@ -136,7 +144,7 @@ angular.module('smartTVRemote.Services')
 				var requestTimedOut = false;
 				var timeoutCountdown = undefined;
 				
-				var url = '//localhost:8080/api/tv/details/' + encodeURIComponent(tvLocationUrl);
+				var url = APIServer + 'api/tv/details/' + encodeURIComponent(tvLocationUrl);
 				
 				$http.get(url, {
 					timeout: timeoutPromise.promise,
@@ -204,7 +212,7 @@ angular.module('smartTVRemote.Services')
 				var requestTimedOut = false;
 				var timeoutCountdown = undefined;
 				
-				var url = '//localhost:8080/api/tv/GetDTVInformation/'
+				var url = APIServer + 'api/tv/GetDTVInformation/'
 					+ encodeURIComponent(tvHost) + '/'
 					+ encodeURIComponent(tvPort) + '/'
 					+ encodeURIComponent(tvLocationUrl);
@@ -273,7 +281,7 @@ angular.module('smartTVRemote.Services')
 				var requestTimedOut = false;
 				var timeoutCountdown = undefined;
 				
-				var url = '//localhost:8080/api/tv/GetVolume/'
+				var url = APIServer + 'api/tv/GetVolume/'
 					+ (tvHost === null || typeof tvHost === 'undefined' ? '' : tvHost);
 				
 				$http.get(url, {

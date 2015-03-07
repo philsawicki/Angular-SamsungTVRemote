@@ -45,15 +45,22 @@ angular.module('smartTVRemote', [
 	}])
 
 	// Disable debug info for production builds:
-	.config(['$compileProvider', function ($compileProvider) {
+	.config(['$compileProvider', 'appConfigProvider', function ($compileProvider, appConfigProvider) {
 		var isDevServer = window.location.href.indexOf('http://localhost:8000/app') !== -1;
+
+		// Disable debug information on production
 		$compileProvider.debugInfoEnabled(!isDevServer);
+
+		if (!isDevServer) {
+			// If the current environment is not the development one, assume that the API Server is on the same host:
+			appConfigProvider.set('APIServer', '/');
+		}
 	}])
 
 	// Create a "String.format()"-like function for formatting purposes:
-	.config(function() {
+	.config(function () {
 		if (!String.prototype.format) {
-			String.prototype.format = function() {
+			String.prototype.format = function () {
 				var args = arguments;
 				return this.replace(/{(\d+)}/g, function (match, number) {
 					return typeof args[number] != 'undefined'
@@ -73,30 +80,30 @@ angular.module('smartTVRemote', [
 		if (navigator && navigator.onLine) {
 			applicationIsOnline = navigator.onLine;
 		}
-		$rootScope.$apply(function() {
+		$rootScope.$apply(function () {
 			$rootScope.applicationIsOnline = applicationIsOnline;
 		});
 
 		// Add event listeners for "online" & "offline" modes:
 		if ($window.addEventListener) {
-			$window.addEventListener('online', function() {
-				$rootScope.$apply(function() {
+			$window.addEventListener('online', function () {
+				$rootScope.$apply(function () {
 					$rootScope.applicationIsOnline = true;
 				});
 			}, false);
-			$window.addEventListener('offline', function() {
-				$rootScope.$apply(function() {
+			$window.addEventListener('offline', function () {
+				$rootScope.$apply(function () {
 					$rootScope.applicationIsOnline = false;
 				});
 			}, false);
 		} else {
-			document.body.ononline = function() {
-				$rootScope.$apply(function() {
+			document.body.ononline = function () {
+				$rootScope.$apply(function () {
 					$rootScope.applicationIsOnline = true;
 				});
 			};
-			document.body.onoffline = function() {
-				$rootScope.$apply(function() {
+			document.body.onoffline = function () {
+				$rootScope.$apply(function () {
 					$rootScope.applicationIsOnline = false;
 				});
 			};

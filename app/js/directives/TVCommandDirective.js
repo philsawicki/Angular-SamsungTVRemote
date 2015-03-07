@@ -12,7 +12,8 @@ angular.module('smartTVRemote.Directives')
 				ctaTitle: '@',
 				keyboardShortcut: '@',
 				keyCode: '@',
-				command: '@'
+				command: '@',
+				icon: '@'
 			},
 			templateUrl: 'views/partial-tvCommand.html',
 			controller: 'TVCommandController'

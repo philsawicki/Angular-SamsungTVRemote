@@ -30,12 +30,16 @@ tvAPI.configureRemote({
  * Configure Express.
  */
 
-var viewsFolder = './app/views/',
-    port = process.env.PORT || 8080;
+var viewsFolder = './dist/',
+    serverPort = process.env.PORT || 8080,
+    serverInterface = process.env.INTERFACE || '0.0.0.0'; // 'localhost';
 
 // Use bodyParser() to get the data from POST requests:
 app.use(bodyParser.urlencoded({ extended: true })); // Support URL-encoded bodies.
 app.use(bodyParser.json()); // Support JSON-encoded bodies.
+//app.use(express.favicon());
+//app.use(express.logger('dev'));
+//app.use(express.errorHandler());
 
 // Enable CORS:
 app.use(function (req, res, next) {
@@ -66,7 +70,7 @@ router.use(function (req, res, next) {
 router.get('/', function (req, res) {
     res.json({
         message: 'Hooray! Welcome to our API!'
-    });   
+    });
 });
 
 
@@ -128,6 +132,11 @@ router.route('/discovery/all')
  */
 app.use('/api', router);
 
+/**
+ * Serve "/dist" folder for distribution.
+ */
+app.use('/css',  express.static(viewsFolder + '/css'));
+app.use('/js', express.static(viewsFolder + '/js'));
 app.get('/', function (req, res) {
     res.sendfile(viewsFolder + 'index.html')
 });
@@ -138,9 +147,9 @@ app.get('/', function (req, res) {
 /**
  * Start the server.
  */
-
-app.listen(port);
-console.log('Server listening on port "' + port + '"');
+app.listen(serverPort, serverInterface, function () {
+    console.log('API server started on "http://%s:%d" in %s mode', serverInterface, serverPort, app.settings.env);
+});
 
 
 
