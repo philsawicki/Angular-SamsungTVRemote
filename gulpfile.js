@@ -35,6 +35,7 @@ gulp.task('minify-js', ['package-partials'], function() {
     var libs = [
         // Libraries:
         './lib/x2js-v1.1.5/xml2json.js',
+        './app/bower_components/toastr/toastr.min.js',
 
         //'./app/bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js',
         //'./app/bower_components/jquery/dist/jquery.js',

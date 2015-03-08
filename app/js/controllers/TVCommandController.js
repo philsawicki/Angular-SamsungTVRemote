@@ -6,8 +6,8 @@
 angular.module('smartTVRemote.Controllers')
 	.controller('TVCommandController', ['$scope', '$element', '$document', 'tvRemoteService', 'applicationStorageService',
 		function ($scope, $element, $document, tvRemoteService, applicationStorageService) {
-			var successInfobox = $('#successInfobox'),
-			    errorInfobox = $('#errorInfobox'),
+			var //successInfobox = $('#successInfobox'),
+			    //errorInfobox = $('#errorInfobox'),
 			    elementToDisable = $element.find('.js-remote-command-button');
 
 			/**
@@ -39,15 +39,39 @@ angular.module('smartTVRemote.Controllers')
 					.then(
 						function success (data) {
 							if (data.success) {
-								successInfobox.find('.message').text(data.message);
-								successInfobox.show();
-								errorInfobox.hide();
+								//successInfobox.find('.message').text(data.message);
+								//successInfobox.show();
+								//errorInfobox.hide();
+
+								// Display Toastr "success" message:
+								var action = '<strong>Success!</strong> ';
+								switch ($scope.command) {
+									case 'KEY_VOLUP':
+										action += 'Volume raised';
+										break;
+
+									case 'KEY_VOLDOWN':
+										action += 'Volume lowered';
+										break;
+
+									case 'KEY_CHUP':
+										action += 'Channel Up';
+										break;
+
+									case 'KEY_CHDOWN':
+										action += 'Channel Down';
+										break;
+								}
+								toastr.success(action);
 
 								console.log(data);
 							} else {
-								errorInfobox.find('.message').text(data.errorMessage);
-								errorInfobox.show();
-								successInfobox.hide();
+								//errorInfobox.find('.message').text(data.errorMessage);
+								//errorInfobox.show();
+								//successInfobox.hide();
+
+								// Display Toastr "error" message:
+								toastr.error(data.message);
 
 								console.error(data.errorMessage);
 							}
@@ -55,9 +79,12 @@ angular.module('smartTVRemote.Controllers')
 							elementToDisable.prop('disabled', false);
 						},
 						function error (reason) {
-							errorInfobox.find('.message').text( JSON.stringify(reason) );
-							errorInfobox.show();
-							successInfobox.hide();
+							//errorInfobox.find('.message').text( JSON.stringify(reason) );
+							//errorInfobox.show();
+							//successInfobox.hide();
+
+							// Display Toastr "error" message:
+							toastr.error( JSON.stringify(reason) );
 
 							console.error(reason);
 
