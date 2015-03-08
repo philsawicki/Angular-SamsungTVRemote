@@ -62,18 +62,23 @@ angular.module('smartTVRemote.Controllers')
 										action += 'Channel Down';
 										break;
 								}
-								toastr.success(action);
 
-								console.log(data);
+								if (typeof toastr !== 'undefined') {
+									toastr.success(action);
+								} else {
+									console.log(data);
+								}
 							} else {
 								//errorInfobox.find('.message').text(data.errorMessage);
 								//errorInfobox.show();
 								//successInfobox.hide();
 
 								// Display Toastr "error" message:
-								toastr.error(data.message);
-
-								console.error(data.errorMessage);
+								if (typeof toastr !== 'undefined') {
+									toastr.error(data.errorMessage);
+								} else {
+									console.error(data);
+								}
 							}
 
 							elementToDisable.prop('disabled', false);
@@ -84,9 +89,11 @@ angular.module('smartTVRemote.Controllers')
 							//successInfobox.hide();
 
 							// Display Toastr "error" message:
-							toastr.error( JSON.stringify(reason) );
-
-							console.error(reason);
+							if (typeof toastr !== 'undefined') {
+								toastr.error( JSON.stringify(reason) );
+							} else {
+								console.error(reason);
+							}
 
 							elementToDisable.prop('disabled', false);
 						}

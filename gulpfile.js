@@ -68,12 +68,14 @@ gulp.task('minify-css', function() {
     var bootstrapBaseCSS = gulp.src('app/bower_components/bootstrap/dist/css/bootstrap.min.css')
             .pipe(replace(/url\((')?\.\.\/fonts\//g, 'url($1fonts/')),
         bootstrapThemeCSS = gulp.src('app/bower_components/bootstrap/dist/css/bootstrap-theme.min.css'),
+        toastrCSS = gulp.src('app/bower_components/toastr/toastr.min.css'),
         applicationCSS = gulp.src('app/css/*.css'),
         combinedStream = cs.create(),
         fontFiles = gulp.src('./app/bower_components/bootstrap/fonts/*', { base: './app/bower_components/bootstrap/' });
 
     combinedStream.append(bootstrapBaseCSS);
     combinedStream.append(bootstrapThemeCSS);
+    combinedStream.append(toastrCSS);
     combinedStream.append(applicationCSS);
 
     var combinedCSS = combinedStream

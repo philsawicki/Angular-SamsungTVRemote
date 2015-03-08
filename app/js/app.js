@@ -74,29 +74,31 @@ angular.module('smartTVRemote', [
 
 	// Configure default "Toastr" settings:
 	.config(function () {
-		toastr.options = {
-			'closeButton': true,
-			'closeHtml': '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>',
-			//'debug': true,
-			'newestOnTop': false,
-			//'progressBar': true,
-			'positionClass': 'toast-bottom-left',
-			//'preventDuplicates': false,
-			//'onclick': null,
-			//'showDuration': '300',
-			//'hideDuration': "1000",
-			'timeOut': '2000', // 5000
-			//'extendedTimeOut': "1000",
-			//'showEasing': "swing",
-			//'hideEasing': "linear",
-			//'showMethod': "fadeIn",
-			//'hideMethod': "fadeOut"
-			toastClass: 'alert alert-dismissible',
-			iconClasses: {
-				error: 'alert-error',
-				info: 'alert-info',
-				success: 'alert-success',
-				warning: 'alert-warning'
+		if (typeof toastr !== 'undefined') {
+			toastr.options = {
+				'closeButton': true,
+				'closeHtml': '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>',
+				//'debug': true,
+				'newestOnTop': false,
+				//'progressBar': true,
+				'positionClass': 'toast-bottom-left',
+				//'preventDuplicates': false,
+				//'onclick': null,
+				//'showDuration': '300',
+				//'hideDuration': "1000",
+				'timeOut': '2000', // 5000
+				//'extendedTimeOut': "1000",
+				//'showEasing': "swing",
+				//'hideEasing': "linear",
+				//'showMethod': "fadeIn",
+				//'hideMethod': "fadeOut"
+				toastClass: 'alert alert-dismissible',
+				iconClasses: {
+					error: 'alert-error',
+					info: 'alert-info',
+					success: 'alert-success',
+					warning: 'alert-warning'
+				}
 			}
 		}
 	})

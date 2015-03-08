@@ -148,7 +148,23 @@ app.get('/', function (req, res) {
  * Start the server.
  */
 app.listen(serverPort, serverInterface, function () {
+    var os = require('os');
+    var networkInterfaces = os.networkInterfaces();
+    var networkIPAddresses = [];
+    for (var i in networkInterfaces) {
+        for (var j in networkInterfaces[i]) {
+            var networkIPAddress = networkInterfaces[i][j];
+            if (networkIPAddress.family === 'IPv4' && !networkIPAddress.internal) {
+                networkIPAddresses.push(networkIPAddress.address);
+            }
+        }
+    }
+
     console.log('API server started on "http://%s:%d" in %s mode', serverInterface, serverPort, app.settings.env);
+    console.log('API server also available on:');
+    for (var i = 0, nbAddresses = networkIPAddresses.length; i < nbAddresses; i++) {
+        console.log('   * http://%s:%d', networkIPAddresses[i], serverPort);
+    }
 });
 
 
