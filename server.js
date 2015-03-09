@@ -4,7 +4,8 @@
 
 var express = require('express'),
     app = express(),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    xmlBodyParser = require('express-xml-bodyparser');
 
 /**
  * API Modules.
@@ -25,7 +26,6 @@ tvAPI.configureRemote({
 
 
 
-
 /**
  * Configure Express.
  */
@@ -37,6 +37,7 @@ var viewsFolder = './dist/',
 // Use bodyParser() to get the data from POST requests:
 app.use(bodyParser.urlencoded({ extended: true })); // Support URL-encoded bodies.
 app.use(bodyParser.json()); // Support JSON-encoded bodies.
+app.use(xmlBodyParser());
 //app.use(express.favicon());
 //app.use(express.logger('dev'));
 //app.use(express.errorHandler());

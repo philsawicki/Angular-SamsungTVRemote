@@ -6,9 +6,7 @@
 angular.module('smartTVRemote.Controllers')
 	.controller('TVCommandController', ['$scope', '$element', '$document', 'tvRemoteService', 'applicationStorageService',
 		function ($scope, $element, $document, tvRemoteService, applicationStorageService) {
-			var //successInfobox = $('#successInfobox'),
-			    //errorInfobox = $('#errorInfobox'),
-			    elementToDisable = $element.find('.js-remote-command-button');
+			var elementToDisable = $element.find('.js-remote-command-button');
 
 			/**
 			 * Keypress handler, called in order to filter the keypress for the expected 
@@ -16,12 +14,12 @@ angular.module('smartTVRemote.Controllers')
 			 * @param  {Event} e The keydown event.
 			 * @return {void}
 			 */
-			var keypressHandler = function (e) {
-				if (e.keyCode.toString() === $scope.keyCode) {
+			var keypressHandler = function (event) {
+				if (event.keyCode.toString() === $scope.keyCode) {
 					$scope.executeCommand();
 
 					// Prevent default behavior (otherwise the window might scroll):
-					e.preventDefault();
+					event.preventDefault();
 				}
 			};
 
@@ -39,40 +37,14 @@ angular.module('smartTVRemote.Controllers')
 					.then(
 						function success (data) {
 							if (data.success) {
-								//successInfobox.find('.message').text(data.message);
-								//successInfobox.show();
-								//errorInfobox.hide();
-
 								// Display Toastr "success" message:
-								var action = '<strong>Success!</strong> ';
-								switch ($scope.command) {
-									case 'KEY_VOLUP':
-										action += 'Volume raised';
-										break;
-
-									case 'KEY_VOLDOWN':
-										action += 'Volume lowered';
-										break;
-
-									case 'KEY_CHUP':
-										action += 'Channel Up';
-										break;
-
-									case 'KEY_CHDOWN':
-										action += 'Channel Down';
-										break;
-								}
-
+								var message = $scope.getMessageForCommand($scope.command);
 								if (typeof toastr !== 'undefined') {
-									toastr.success(action);
+									toastr.success(message);
 								} else {
 									console.log(data);
 								}
 							} else {
-								//errorInfobox.find('.message').text(data.errorMessage);
-								//errorInfobox.show();
-								//successInfobox.hide();
-
 								// Display Toastr "error" message:
 								if (typeof toastr !== 'undefined') {
 									toastr.error(data.errorMessage);
@@ -84,10 +56,6 @@ angular.module('smartTVRemote.Controllers')
 							elementToDisable.prop('disabled', false);
 						},
 						function error (reason) {
-							//errorInfobox.find('.message').text( JSON.stringify(reason) );
-							//errorInfobox.show();
-							//successInfobox.hide();
-
 							// Display Toastr "error" message:
 							if (typeof toastr !== 'undefined') {
 								toastr.error( JSON.stringify(reason) );
@@ -98,6 +66,38 @@ angular.module('smartTVRemote.Controllers')
 							elementToDisable.prop('disabled', false);
 						}
 					);
+			};
+
+			/**
+			 * Return a message for the given Remote command.
+			 * @param  {string} command The command for which to get a message (e.g.: "KEY_VOLUP").
+			 * @return {string} A message for the given Remote command.
+			 */
+			$scope.getMessageForCommand = function (command) {
+				var message = '<strong>Success!</strong> ';
+
+				switch (command) {
+					case 'KEY_VOLUP':
+						message += 'Volume raised';
+						break;
+
+					case 'KEY_VOLDOWN':
+						message += 'Volume lowered';
+						break;
+
+					case 'KEY_CHUP':
+						message += 'Channel Up';
+						break;
+
+					case 'KEY_CHDOWN':
+						message += 'Channel Down';
+						break;
+
+					default:
+						message = ''; // Reset the message
+						break;
+				}
+				return message;
 			};
 
 			/**
