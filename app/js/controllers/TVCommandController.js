@@ -28,17 +28,19 @@ angular.module('smartTVRemote.Controllers')
 			 * @return {void}
 			 */
 			$scope.executeCommand = function () {
-				elementToDisable.prop('disabled', false);
-				
-				// Get the TV IP from storage:
-				var tvIP = applicationStorageService.getConnectedTVIP();
+				var commandAlreadyInProgress = typeof elementToDisable.attr('disabled') !== 'undefined';
+				if (!commandAlreadyInProgress) {
+					elementToDisable.attr('disabled', true);
+					
+					// Get the TV IP from storage:
+					var tvIP = applicationStorageService.getConnectedTVIP();
 
-				tvRemoteService.sendRemoteCommand(tvIP, $scope.command)
+					tvRemoteService.sendRemoteCommand(tvIP, $scope.command)
 					.then(
 						function success (data) {
 							if (data.success) {
 								// Display Toastr "success" message:
-								var message = $scope.getMessageForCommand($scope.command);
+								var message = $scope.getSuccessMessageForCommand($scope.command);
 								if (typeof toastr !== 'undefined') {
 									toastr.success(message);
 								} else {
@@ -52,28 +54,29 @@ angular.module('smartTVRemote.Controllers')
 									console.error(data);
 								}
 							}
-
-							elementToDisable.prop('disabled', false);
 						},
 						function error (reason) {
 							// Display Toastr "error" message:
+							var message = $scope.getErrorMessageForCommand(reason);
 							if (typeof toastr !== 'undefined') {
-								toastr.error( JSON.stringify(reason) );
+								toastr.error( message );
 							} else {
 								console.error(reason);
 							}
-
-							elementToDisable.prop('disabled', false);
 						}
-					);
+					)
+					.finally(function () {
+						elementToDisable.attr('disabled', false);
+					});
+				}
 			};
 
 			/**
-			 * Return a message for the given Remote command.
+			 * Return a "success" message for the given Remote command.
 			 * @param  {string} command The command for which to get a message (e.g.: "KEY_VOLUP").
 			 * @return {string} A message for the given Remote command.
 			 */
-			$scope.getMessageForCommand = function (command) {
+			$scope.getSuccessMessageForCommand = function (command) {
 				var message = '<strong>Success!</strong> ';
 
 				switch (command) {
@@ -99,6 +102,23 @@ angular.module('smartTVRemote.Controllers')
 				}
 				return message;
 			};
+
+			/**
+			 * Return an "error" message with the given reason.
+			 * @param  {Object} reason The error Object.
+			 * @return {string} An "error" message with the given reason.
+			 */
+			$scope.getErrorMessageForCommand = function (reason) {
+				var message = '<strong>Error:</strong> ';
+
+				if (reason && reason.message) {
+					message += reason.message;
+				} else {
+					message += JSON.stringify(reason);
+				}
+
+				return message;
+			}
 
 			/**
 			 * Attach the keypress Handler to the $document.

@@ -94,7 +94,7 @@ angular.module('smartTVRemote', [
 				//'hideMethod': "fadeOut"
 				toastClass: 'alert alert-dismissible',
 				iconClasses: {
-					error: 'alert-error',
+					error: 'alert-danger',
 					info: 'alert-info',
 					success: 'alert-success',
 					warning: 'alert-warning'

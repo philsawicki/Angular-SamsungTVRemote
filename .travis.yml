@@ -2,6 +2,16 @@ language: node_js
 node_js:
   - "0.10"
 
+# http://rkh.github.io/travis-encrypt/public/index.html
+# http://www.scala-sbt.org/0.13/docs/Travis-CI-with-sbt.html
+
+notifications:
+  email:
+    recipients:
+      secure:  ik93zHtP4Atjqb/HP49MZZRGM0QCSPOFiYk0glZqD+Agqccjvn7ga93s6jEeVJstPxoXBzKE64fzcVmqEdJvErhaS3+rpGHAzYCrV7q+98B7OiKAvFKGpnTVoAHRvTB7nNBN7E+IpTI6H9hrFQowxwoUJxbTU3kMaSND95+MJ6o=
+    on_success: change
+    on_failure: always
+
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
@@ -12,3 +22,11 @@ before_script:
 script:
   - node_modules/.bin/karma start karma.conf.js --no-auto-watch --single-run --reporters=dots --browsers=Firefox
   #- node_modules/.bin/protractor e2e-tests/protractor.conf.js --browser=firefox
+
+after_script:
+  - ./node_modules/karma/bin/karma start karma.conf.js --no-auto-watch --single-run --browsers=Firefox
+  - node node_modules/lcov-filter/index.js ./build/reports/coverage/report-lcov/lcov.info config | node node_modules/coveralls/bin/coveralls.js
+  #- ./node_modules/karma/bin/karma start
+  #- istanbul cover ./node_modules/mocha/bin/_mocha server/api/**/*.spec.js
+  #- cat ./coverage/lcov.info ./coverage/karma/**/*.info > lcov.info 
+  #- node node_modules/lcov-filter/index.js lcov.info config | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
