@@ -14,7 +14,7 @@ angular.module('smartTVRemote.Controllers')
 			 * @param  {Event} e The keydown event.
 			 * @return {void}
 			 */
-			var keypressHandler = function (event) {
+			$scope.keypressHandler = function (event) {
 				if (event.keyCode.toString() === $scope.keyCode) {
 					$scope.executeCommand();
 
@@ -123,14 +123,14 @@ angular.module('smartTVRemote.Controllers')
 			/**
 			 * Attach the keypress Handler to the $document.
 			 */
-			$document.on('keydown', keypressHandler);
+			$document.on('keydown', $scope.keypressHandler);
 
 			/**
 			 * Called when the Directive's $scope is destroyed.
 			 * Used to remove the keypress Handler from leaking memory.
 			 */
 			$scope.$on('$destroy', function () {
-				$document.off('keydown', keypressHandler);
+				$document.off('keydown', $scope.keypressHandler);
 			});
 		}
 	]);

@@ -25,7 +25,9 @@ module.exports = function (config) {
         ],
 
         // List of files to exclude:
-        exclude: [],
+        exclude: [
+			'app/js/lib/**/*.js'
+		],
 
         // Test result reporters to use:
         reporters: ['progress', 'coverage'],
