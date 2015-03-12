@@ -65,16 +65,22 @@ gulp.task('minify-js', ['package-partials'], function() {
  * Minify CSS files, rewrite relative paths of Bootstrap fonts & copy Bootstrap fonts.
  */
 gulp.task('minify-css', function() {
-    var bootstrapBaseCSS = gulp.src('app/bower_components/bootstrap/dist/css/bootstrap.min.css')
+    var //bootstrapBaseCSS = gulp.src('app/bower_components/bootstrap/dist/css/bootstrap.min.css')
+        //    .pipe(replace(/url\((')?\.\.\/fonts\//g, 'url($1fonts/')),
+        //bootstrapThemeCSS = gulp.src('app/bower_components/bootstrap/dist/css/bootstrap-theme.min.css'),
+        bootswatchThemeCSS = gulp.src('app/css/lumen/bootstrap.css')
             .pipe(replace(/url\((')?\.\.\/fonts\//g, 'url($1fonts/')),
-        bootstrapThemeCSS = gulp.src('app/bower_components/bootstrap/dist/css/bootstrap-theme.min.css'),
+        bootswatchBaseCSS = gulp.src('app/css/bootswatch.css'),
         toastrCSS = gulp.src('app/bower_components/toastr/toastr.min.css'),
-        applicationCSS = gulp.src('app/css/*.css'),
+        applicationCSS = gulp.src('app/css/app.css'),
         combinedStream = cs.create(),
-        fontFiles = gulp.src('./app/bower_components/bootstrap/fonts/*', { base: './app/bower_components/bootstrap/' });
+        //fontFiles = gulp.src('./app/bower_components/bootstrap/fonts/*', { base: './app/bower_components/bootstrap/' });
+        fontFiles = gulp.src('./app/css/fonts/**.*', { base: './app/css/' });
 
-    combinedStream.append(bootstrapBaseCSS);
-    combinedStream.append(bootstrapThemeCSS);
+    //combinedStream.append(bootstrapBaseCSS);
+    //combinedStream.append(bootstrapThemeCSS);
+    combinedStream.append(bootswatchThemeCSS);
+    combinedStream.append(bootswatchBaseCSS);
     combinedStream.append(toastrCSS);
     combinedStream.append(applicationCSS);
 

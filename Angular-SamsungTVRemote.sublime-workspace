@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"key",
+				"keyCode"
+			],
+			[
+				"net",
+				"networkIPAddresses"
+			],
+			[
+				"add",
+				"addresses"
+			],
+			[
+				"back",
+				"background-position"
+			],
+			[
 				"Dis",
 				"DiscoveryService"
 			],
@@ -300,10 +316,6 @@
 				"addStockName"
 			],
 			[
-				"add",
-				"addStockSuggestions"
-			],
-			[
 				"up",
 				"update"
 			],
@@ -502,61 +514,40 @@
 			[
 				"data",
 				"dateTimestamp"
-			],
-			[
-				"sche",
-				"scheduleResponse"
-			],
-			[
-				"cacke",
-				"cacheKeyPrefix_"
-			],
-			[
-				"sch",
-				"scheduleResponse"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "api/discovery.js",
+			"file": "app/css/app.css",
 			"settings":
 			{
-				"buffer_size": 971,
+				"buffer_size": 4942,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "api/services/discoveryService.js",
+			"file": "app/views/page-home.html",
 			"settings":
 			{
-				"buffer_size": 4771,
-				"line_ending": "Windows",
-				"name": "'use strict';"
-			}
-		},
-		{
-			"file": "api/browser.js",
-			"settings":
-			{
-				"buffer_size": 1411,
+				"buffer_size": 6955,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "api/services/browserService.js",
+			"file": "app/js/controllers/TVCommandController.js",
 			"settings":
 			{
-				"buffer_size": 2609,
+				"buffer_size": 3767,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "api/services/tvService.js",
+			"file": "test/unit/controllers/TVCommandControllerSpec.js",
 			"settings":
 			{
-				"buffer_size": 8186,
+				"buffer_size": 4395,
 				"line_ending": "Windows"
 			}
 		},
@@ -564,7 +555,7 @@
 			"file": "server.js",
 			"settings":
 			{
-				"buffer_size": 3507,
+				"buffer_size": 4673,
 				"line_ending": "Unix"
 			}
 		},
@@ -577,37 +568,10 @@
 			}
 		},
 		{
-			"file": ".travis.yml",
+			"file": "app/js/app.js",
 			"settings":
 			{
-				"buffer_size": 412,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "README.md",
-			"settings":
-			{
-				"buffer_size": 373,
-				"line_ending": "Windows",
-				"name": "[![Build Status](https://travis-ci.org/philsawicki"
-			}
-		},
-		{
-			"contents": "Package Control Messages\n========================\n\nPackage Control:\n---------------\n\n  Version 3.0 Release Notes\n  \n  \n  **** Windows Sublime Text 3 Users ****\n  \n  Due to a bug in Package Control 2.0, Windows ST3 users will need to open the\n  Sublime Text console (ctrl+`) and execute the following Python to properly\n  upgrade. All other users may ignore this part of the message.\n  \n  Make sure NOT to copy the leading two spaces, or an \"unexpected indent\" error\n  will occur.\n  \n  import urllib.request,os,sys; exec(\"if sys.version_info < (3,) or os.name != 'nt': raise OSError('This code is for Windows ST3 only!')\"); pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')\n  \n  ********\n  \n  \n  Package Control 3.0 adds a bunch of polish, improving the Sublime Text\n  experience for users and package developers:\n  \n   - improved upgrades of themes, color schemes and syntaxes\n   - dependency support\n   - SSL for Linux\n   - new secondary Windows HTTP backend\n   - patches for Python in Sublime Text 2 on Windows\n   - commands to easily remove channels and repositories\n   - an events API for packages\n   - improved documentation\n  \n  \n  As of July 2014, I now work for myself. This has allowed me to spend more time\n  working on open source software, including Package Control. If you appreciate\n  the work I've done, please consider a small donation. If even 5% of regular\n  users donated the price of a coffee or beer, that would cover quite a bit of\n  my development time! See https://packagecontrol.io/about for options.\n  \n  \n  Some recent Package Control stats:\n  \n   - every weekday over 1M JSON requests hit the channel server\n   - in December, the channel server will transmit 4TB+ of compressed JSON\n   - users have installed, upgraded or removed 85M+ packages since late 2011\n  \n  \n  Read more about the release at:\n  \n  https://packagecontrol.io/news#2014-12-23-Package_Control_30_Released\n  \n\n\nPackage Control:\n---------------\n\n  Version 3.0 Release Notes\n  \n  \n  **** Windows Sublime Text 3 Users ****\n  \n  Due to a bug in Package Control 2.0, Windows ST3 users will need to open the\n  Sublime Text console (ctrl+`) and execute the following Python to properly\n  upgrade. All other users may ignore this part of the message.\n  \n  Make sure NOT to copy the leading two spaces, or an \"unexpected indent\" error\n  will occur.\n  \n  import urllib.request,os,sys; exec(\"if sys.version_info < (3,) or os.name != 'nt': raise OSError('This code is for Windows ST3 only!')\"); pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')\n  \n  ********\n  \n  \n  Package Control 3.0 adds a bunch of polish, improving the Sublime Text\n  experience for users and package developers:\n  \n   - improved upgrades of themes, color schemes and syntaxes\n   - dependency support\n   - SSL for Linux\n   - new secondary Windows HTTP backend\n   - patches for Python in Sublime Text 2 on Windows\n   - commands to easily remove channels and repositories\n   - an events API for packages\n   - improved documentation\n  \n  \n  As of July 2014, I now work for myself. This has allowed me to spend more time\n  working on open source software, including Package Control. If you appreciate\n  the work I've done, please consider a small donation. If even 5% of regular\n  users donated the price of a coffee or beer, that would cover quite a bit of\n  my development time! See https://packagecontrol.io/about for options.\n  \n  \n  Some recent Package Control stats:\n  \n   - every weekday over 1M JSON requests hit the channel server\n   - in December, the channel server will transmit 4TB+ of compressed JSON\n   - users have installed, upgraded or removed 85M+ packages since late 2011\n  \n  \n  Read more about the release at:\n  \n  https://packagecontrol.io/news#2014-12-23-Package_Control_30_Released\n  \n",
-			"settings":
-			{
-				"buffer_size": 4837,
-				"line_ending": "Windows",
-				"name": "Package Control Messages",
-				"scratch": true
-			}
-		},
-		{
-			"file": "app/js/services/TVRemoteService.js",
-			"settings":
-			{
-				"buffer_size": 9985,
+				"buffer_size": 4212,
 				"line_ending": "Windows"
 			}
 		}
@@ -660,35 +624,51 @@
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/api",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/api/services",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/bower_components",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/bower_components/toastr",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/css",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/controllers",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/directives",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/providers",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/services",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views"
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/proxy",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/test",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/test/unit",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/test/unit/controllers",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/test/unit/providers"
 	],
 	"file_history":
 	[
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/api/discovery.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/api/services/discoveryService.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/api/browser.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/api/services/browserService.js",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/api/services/tvService.js",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/karma.conf.js",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/services/TVRemoteService.js",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/.gitignore",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/api/tv.js",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/server.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/providers/ApplicationConfigurationProvider.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/api/tv.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/.travis.yml",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/services/TVRemoteService.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/services/DiscoveryService.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/index.html",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views/partial-tvCommand.html",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/directives/TVCommandDirective.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/controllers/TVCommandController.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views/page-home.html",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views/partial-navigationBar.html",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/app.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/gulpfile.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/README.md",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/karma.conf.js",
+		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/.gitignore",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/controllers/DiscoveryPageController.js",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views/page-discovery.html",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views/page-home.html",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/controllers/HomePageController.js",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/gulpfile.js",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/index.html",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/css/app.css",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views/partial-tvCommand.html",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/controllers/TVCommandController.js",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/directives/NavigationBarDirective.js",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/directives/TVCommandDirective.js",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/providers/XMLToJSONProvider.js",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/package.json",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/api/browser.js",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/script_start.cmd",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/api-spec/browserSpec.js",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/controllers/AboutPageController.js",
@@ -699,16 +679,11 @@
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/test/unit/providers/ApplicationConfigurationProviderSpec.js",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/test/unit/providers/ErrorMessagesProviderSpec.js",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/test/unit/services/ApplicationStorageServiceSpec.js",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/providers/ApplicationConfigurationProvider.js",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/services/ApplicationStorageService.js",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/services/DiscoveryService.js",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/api/discovery.js",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/proxy/Samsung-Remote.js",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/app.js",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views/page-about.html",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/providers/ErrorMessagesProvider.js",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/services/StorageService.js",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views/partial-navigationBar.html",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/index-async.html",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views/index.html",
 		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views/discovery.html",
@@ -792,11 +767,7 @@
 		"/C/Program Files (x86)/EasyPHP-DevServer-14.1VC11/data/localweb/TVSchedule/app/lib/TVSchedule/Service/Validation/ValidableInterface.php",
 		"/C/Program Files (x86)/EasyPHP-DevServer-14.1VC11/data/localweb/TVSchedule/app/lib/TVSchedule/Service/Validation/AbstractValidator.php",
 		"/C/Program Files (x86)/EasyPHP-DevServer-14.1VC11/data/localweb/TVSchedule/app/lib/TVSchedule/Service/Validation/Laravel/AbstractLaravelValidator.php",
-		"/C/Program Files (x86)/EasyPHP-DevServer-14.1VC11/data/localweb/TVSchedule/app/lib/TVSchedule/Service/Validation/Laravel/UserCreateValidator.php",
-		"/C/Program Files (x86)/EasyPHP-DevServer-14.1VC11/data/localweb/TVSchedule/app/lib/TVSchedule/Service/Validation/Laravel/StubValidator.php",
-		"/C/Program Files (x86)/EasyPHP-DevServer-14.1VC11/data/localweb/TVSchedule/app/tests/unit/UserValidatorTest.php",
-		"/C/Program Files (x86)/EasyPHP-DevServer-14.1VC11/data/localweb/TVSchedule/app/tests/ExampleTest.php",
-		"/C/Program Files (x86)/EasyPHP-DevServer-14.1VC11/data/localweb/TVSchedule/app/views/register/index.blade.php"
+		"/C/Program Files (x86)/EasyPHP-DevServer-14.1VC11/data/localweb/TVSchedule/app/lib/TVSchedule/Service/Validation/Laravel/UserCreateValidator.php"
 	],
 	"find":
 	{
@@ -864,143 +835,140 @@
 	"groups":
 	[
 		{
-			"selected": 9,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "api/discovery.js",
+					"file": "app/css/app.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 971,
+						"buffer_size": 4942,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								302,
-								115
+								3662,
+								3662
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2933.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/views/page-home.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6955,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1961,
+								1961
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 495.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/js/controllers/TVCommandController.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3767,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1332,
+								1332
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "api/services/discoveryService.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4771,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3089,
-								3110
-							]
-						],
-						"settings":
-						{
-							"auto_name": "'use strict';",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1125.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "api/browser.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1411,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1266,
-								1266
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 195.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "api/services/browserService.js",
+					"file": "test/unit/controllers/TVCommandControllerSpec.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2609,
+						"buffer_size": 4395,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								807,
-								416
+								1559,
+								1559
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 225.0,
+						"translation.y": 270.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "api/services/tvService.js",
+					"file": "server.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8186,
+						"buffer_size": 4673,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7369,
-								7369
+								483,
+								483
 							]
 						],
 						"settings":
@@ -1010,7 +978,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2664.0,
+						"translation.y": 90.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 5,
@@ -1018,36 +986,6 @@
 				},
 				{
 					"buffer": 5,
-					"file": "server.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3507,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2531,
-								2531
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": -0.0,
-						"translation.y": 1035.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
 					"file": "api/tv.js",
 					"semi_transient": false,
 					"settings":
@@ -1059,8 +997,8 @@
 						"selection":
 						[
 							[
-								6809,
-								6809
+								14328,
+								14333
 							]
 						],
 						"settings":
@@ -1070,112 +1008,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3109.0,
+						"translation.y": 6525.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": ".travis.yml",
+					"buffer": 6,
+					"file": "app/js/app.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 412,
+						"buffer_size": 4212,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								412,
-								412
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/YAML/YAML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "README.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 373,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								154,
-								154
-							]
-						],
-						"settings":
-						{
-							"auto_name": "[![Build Status](https://travis-ci.org/philsawicki",
-							"syntax": "Packages/Markdown/Markdown.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4837,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4837,
-								4837
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"word_wrap": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "app/js/services/TVRemoteService.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9985,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4593,
-								4593
+								2646,
+								2646
 							]
 						],
 						"settings":
@@ -1184,10 +1037,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4343.0,
+						"translation.y": 945.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
