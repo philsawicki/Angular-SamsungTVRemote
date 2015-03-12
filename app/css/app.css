@@ -220,34 +220,46 @@ body {
 	margin: auto 0.5em auto -1.5em;
 }
 
-#toast-container > .alert-info:before {
-	/*content: "\f05a";*/
-}
+/*
 #toast-container > .alert-info:before,
 #toast-container > .alert-info {
 	color: #31708f;
 }
 
-#toast-container > .alert-success:before {
-	/*content: "\f00c";*/
-}
 #toast-container > .alert-success:before,
 #toast-container > .alert-success {
 	color: #3c763d;
 }
 
-#toast-container > .alert-warning:before {
-	/*content: "\f06a";*/
-}
 #toast-container > .alert-warning:before,
 #toast-container > .alert-warning {
 	color: #8a6d3b;
 }
 
-#toast-container > .alert-danger:before {
-	/*content: "\f071";*/
-}
 #toast-container > .alert-danger:before,
 #toast-container > .alert-danger {
 	color: #a94442;
 }
+*/
+
+
+/*
+.alert-success {
+	color: #3C763D;
+	background-color: #dff0d8;
+	border-color: #c8e5bc;
+}
+*/
+.alert-warning .alert-link,
+.alert-warning {
+	color: #8A6D3B;
+	background-color: #fcf8e3;
+	border-color: #f8efc0;
+}
+/*
+.alert-danger {
+	color: #A94442;
+	background-color: #f2dede;
+	border-color: #e7c3c3;
+}
+*/
