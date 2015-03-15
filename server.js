@@ -15,6 +15,8 @@ var tvAPI = require('./api/tv'),
     discoveryAPI = require('./api/discovery'),
     browserAPI = require('./api/browser');
 
+var textBodyParser = bodyParser.text();
+
 
 
 /**
@@ -35,6 +37,7 @@ var viewsFolder = './dist/',
     serverInterface = process.env.INTERFACE || '0.0.0.0'; // 'localhost';
 
 // Use bodyParser() to get the data from POST requests:
+app.use(bodyParser.text({ type: 'text/xml' }));
 app.use(bodyParser.urlencoded({ extended: true })); // Support URL-encoded bodies.
 app.use(bodyParser.json()); // Support JSON-encoded bodies.
 app.use(xmlBodyParser());
@@ -97,11 +100,11 @@ router.route('/tv/GetAvailableActions/:host/:port/:tvControlUrl')
 router.route('/tv/livestream/:host/:port/:tvControlUrl')
     .get( tvAPI.livestream )
     .post( tvAPI.livestream );
-router.route('/tv/subscribe/:host/:port/:tvControlUrl')
+router.route('/tv/subscribe/:host/:port?/:tvControlUrl?')
     .get( tvAPI.subscribe )
     .post( tvAPI.subscribe );
-router.route('/tv/gena/1')
-    .notify( tvAPI.notify );
+//router.route('/tv/gena/1')
+//    .notify( tvAPI.notify );
 router.route('/tv/GetVolume/:host/:port?')
     .get( tvAPI.getVolume )
     .post( tvAPI.getVolume );
@@ -132,6 +135,7 @@ router.route('/discovery/all')
  * All routes will be prefixed by "/api".
  */
 app.use('/api', router);
+app.notify('/api/tv/gena/1', textBodyParser, tvAPI.notify);
 
 /**
  * Serve "/dist" folder for distribution.
@@ -149,6 +153,7 @@ app.get('/', function (req, res) {
  * Start the server.
  */
 app.listen(serverPort, serverInterface, function () {
+    /*
     var os = require('os');
     var networkInterfaces = os.networkInterfaces();
     var networkIPAddresses = [];
@@ -160,6 +165,9 @@ app.listen(serverPort, serverInterface, function () {
             }
         }
     }
+    */
+    var ipService = require('./api/services/ipService');
+    var networkIPAddresses = ipService.getIPAddresses();
 
     console.log('API server started on "http://%s:%d" in %s mode', serverInterface, serverPort, app.settings.env);
     console.log('API server also available on:');

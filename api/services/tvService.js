@@ -183,12 +183,24 @@ var TVService = function () {
     var subscribe = function (tvHost, tvPort, tvPath) {
         var deferred = Q.defer();
 
+        if (typeof tvPort === 'undefined') {
+            tvPort = 7676;
+        }
+        if (typeof tvPath === 'undefined') {
+            tvPath = '/smp_5_';
+        }
+
+        var ipService = require('./ipService');
+        var ipAddress = ipService.getIPAddress();
+        var appPort = 8080;
+        var callbackUrl = 'http://' + ipAddress + ':' + appPort + '/api/tv/gena/1';
+
         var body = '';
 
         var getRequest = {
             host: tvHost,
-            path: '/smp_5_', // Even tough the "controlURL" can be something like "/smp_8_", the TV seems to only respond when queried through "/smp_4_"...
-            port: 7676,
+            path: tvPath, //'/smp_5_', // Even tough the "controlURL" can be something like "/smp_8_", the TV seems to only respond when queried through "/smp_4_"...
+            port: tvPort, //7676,
             method: 'SUBSCRIBE',
             headers: {
                 //'Content-Type': 'text/xml;charset="utf-8"',
@@ -198,7 +210,7 @@ var TVService = function () {
                 //'Range': 'bytes=0-'
                 //'SOAPACTION': '"urn:samsung.com:service:MainTVAgent2:1#GetAvailableActions"'
                 
-                'CALLBACK': '<http://192.168.2.12:8080/api/tv/gena/1>',
+                'CALLBACK': '<' + callbackUrl + '>', //'<http://192.168.2.12:8080/api/tv/gena/1>',
                 'NT': 'upnp:event',
                 'TIMEOUT': 'Second-300'
             }

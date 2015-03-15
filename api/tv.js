@@ -213,15 +213,14 @@ var tvApi = function () {
         var tvControlUrl = req.params.tvControlUrl;
 
         // Validate expected parameters:
-        if (!tvControlUrl) {
-            res.status(400).json({
-                message: 'Missing TV Control URL',
-                success: false,
-                error: true,
-                errorMessage: 'Missing TV Control URL'
-            });
-        }
-
+        //if (!tvControlUrl) {
+        //    res.status(400).json({
+        //        message: 'Missing TV Control URL',
+        //        success: false,
+        //        error: true,
+        //        errorMessage: 'Missing TV Control URL'
+        //    });
+        //}
 
         TVService.subscribe(tvHost, tvPort, tvControlUrl)
         .then(
@@ -240,6 +239,8 @@ var tvApi = function () {
      * @param  {[type]} req [description]
      * @param  {[type]} res [description]
      * @return {[type]}     [description]
+     *
+     * http://stackoverflow.com/questions/20909778/how-to-use-socket-io-in-express-routes
      */
     var notify = function (req, res) {
         console.log('HEADERS = ', req.headers);
