@@ -8,7 +8,7 @@ angular.module('smartTVRemote.Controllers')
     .controller('ApplicationController', ['$scope', 'tvRemoteService', 'applicationStorageService',
         function ($scope, tvRemoteService, applicationStorageService) {
             /**
-             * Check if there is a TV IP save in the Storage Service.
+             * Check if there is a TV IP saved in the Storage Service.
              * @type {bool}
              */
             var tvIP = applicationStorageService.getConnectedTVIP();
@@ -35,6 +35,10 @@ angular.module('smartTVRemote.Controllers')
                         },
                         function error (reason) {
                             console.error('Failed to subscribe to TV Notifications.', reason);
+
+                            if (typeof toastr !== 'undefined') {
+                                toastr.error('Failed to subscribe to TV Notifications. TV might be off or unreachable.')
+                            }
                         }
                     );
                 }
@@ -49,7 +53,7 @@ angular.module('smartTVRemote.Controllers')
             $scope.$on('$destroy', function () {
                 console.log('ApplicationController::$destroy()');
 
-                tvRemoteService.unsubscribeFromTVNotifications();
+                tvRemoteService.unsubscribeFromTVNotifications(tvIP);
             });
         }
     ]);

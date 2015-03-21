@@ -95,6 +95,7 @@ var tvApi = function () {
             },
             function error (reason) {
                 res.status(500).json(reason);
+                res.end();
             }
         );
     };
@@ -453,6 +454,8 @@ var tvApi = function () {
         };
 
         var buffer = '';
+        var tvRequestHasError = false;
+        var tvRequestError = {};
 
         var tvReq = _http.request(postRequest, function (tvRes) {
             console.log('STATUS: ' + tvRes.statusCode);
@@ -463,14 +466,22 @@ var tvApi = function () {
                 buffer += data;
             });
             tvRes.on('error', function (error) {
-                res.status(500).write(error);
+                tvRequestHasError = true;
+                tvRequestError = error;
+                //res.status(500).write(error);
             });
             tvRes.on('end', function (data) {
                 console.log('BODY: "' + buffer + '"');
-                res.write(buffer);
-                res.end();
+                if (!tvRequestHasError) {
+                    res.write(buffer);
+                    res.end();
+                } else {
+                    res.status(500).write(error);
+                    res.end();
+                }
             });
-        }).on('error', function (error) {
+        });
+        tvReq.on('error', function (error) {
             res.status(500).json({
                 message: 'Error.',
                 success: false,

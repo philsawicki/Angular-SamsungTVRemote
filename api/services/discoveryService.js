@@ -125,12 +125,22 @@ var DiscoveryService = function () {
 
         http.get(locationURL, function (xmlRes) {
             var buffer = '';
+            var responseHasError = false;
+            var responseError = {};
 
             xmlRes.on('data', function (data) {
                 buffer += data;
             });
+            xmlRes.on('error', function (error) {
+                responseHasError = true;
+                responseError = error;
+            });
             xmlRes.on('end', function (data) {
-                deferred.resolve(buffer);
+                if (!responseHasError) {
+                    deferred.resolve(buffer);
+                } else {
+                    deferred.reject(responseError);
+                }
             });
         }).on('error', function (error) {
             deferred.reject(error);

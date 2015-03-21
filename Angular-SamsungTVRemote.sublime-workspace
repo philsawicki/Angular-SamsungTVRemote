@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"respon",
+				"responseHasError"
+			],
+			[
+				"respos",
+				"responseError"
+			],
+			[
+				"respo",
+				"responseHasError"
+			],
+			[
+				"tvR",
+				"tvRequestHasError"
+			],
+			[
+				"tvRe",
+				"tvRequestError"
+			],
+			[
+				"netw",
+				"networkIPAddresses"
+			],
+			[
+				"Applicat",
+				"ApplicationController"
+			],
+			[
 				"key",
 				"keyCode"
 			],
@@ -30,10 +58,6 @@
 			[
 				"res",
 				"responses"
-			],
-			[
-				"respo",
-				"response"
 			],
 			[
 				"getD",
@@ -490,30 +514,6 @@
 			[
 				"Con",
 				"ConsoleBuilder"
-			],
-			[
-				"get",
-				"getBuilder"
-			],
-			[
-				"ConsoleBui",
-				"ConsoleBuilderFactory"
-			],
-			[
-				"nextp",
-				"nextPageData"
-			],
-			[
-				"previou",
-				"previousPageData"
-			],
-			[
-				"TV",
-				"TVScheduleApp"
-			],
-			[
-				"data",
-				"dateTimestamp"
 			]
 		]
 	},
@@ -523,8 +523,8 @@
 			"file": "app/css/app.css",
 			"settings":
 			{
-				"buffer_size": 4942,
-				"line_ending": "Windows"
+				"buffer_size": 4985,
+				"line_ending": "Unix"
 			}
 		},
 		{
@@ -544,6 +544,31 @@
 			}
 		},
 		{
+			"file": "app/js/services/TVRemoteService.js",
+			"settings":
+			{
+				"buffer_size": 13556,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/js/controllers/ApplicationController.js",
+			"settings":
+			{
+				"buffer_size": 2179,
+				"line_ending": "Unix",
+				"name": "'use strict';"
+			}
+		},
+		{
+			"file": "app/index.html",
+			"settings":
+			{
+				"buffer_size": 5611,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "test/unit/controllers/TVCommandControllerSpec.js",
 			"settings":
 			{
@@ -555,16 +580,49 @@
 			"file": "server.js",
 			"settings":
 			{
-				"buffer_size": 4673,
+				"buffer_size": 4956,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "package.json",
+			"settings":
+			{
+				"buffer_size": 2062,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "api/services/ipService.js",
+			"settings":
+			{
+				"buffer_size": 863,
+				"line_ending": "Unix",
+				"name": "'use strict';"
 			}
 		},
 		{
 			"file": "api/tv.js",
 			"settings":
 			{
-				"buffer_size": 18203,
+				"buffer_size": 18687,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "api/services/discoveryService.js",
+			"settings":
+			{
+				"buffer_size": 5135,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "api/services/tvService.js",
+			"settings":
+			{
+				"buffer_size": 8963,
+				"line_ending": "Unix"
 			}
 		},
 		{
@@ -620,23 +678,15 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/api",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/api/services",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/bower_components",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/bower_components/toastr",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/css",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/controllers",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/directives",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/js/services",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/app/views",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/proxy",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/test",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/test/unit",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/test/unit/controllers",
-		"/C/Users/Philippe/Documents/GitHub/Angular-SamsungTVRemote/test/unit/providers"
+		"/Users/Phil/Documents/Projects/Angular-SamsungTVRemote",
+		"/Users/Phil/Documents/Projects/Angular-SamsungTVRemote/api",
+		"/Users/Phil/Documents/Projects/Angular-SamsungTVRemote/api/services",
+		"/Users/Phil/Documents/Projects/Angular-SamsungTVRemote/app",
+		"/Users/Phil/Documents/Projects/Angular-SamsungTVRemote/app/js",
+		"/Users/Phil/Documents/Projects/Angular-SamsungTVRemote/app/js/controllers",
+		"/Users/Phil/Documents/Projects/Angular-SamsungTVRemote/app/js/services",
+		"/Users/Phil/Documents/Projects/Angular-SamsungTVRemote/node_modules/gulp",
+		"/Users/Phil/Documents/Projects/Angular-SamsungTVRemote/node_modules/gulp/bin"
 	],
 	"file_history":
 	[
@@ -835,7 +885,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 10,
 			"sheets":
 			[
 				{
@@ -844,15 +894,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4942,
+						"buffer_size": 4985,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3662,
-								3662
+								0,
+								0
 							]
 						],
 						"settings":
@@ -864,7 +914,7 @@
 						"translation.y": 2933.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 13,
 					"type": "text"
 				},
 				{
@@ -893,7 +943,7 @@
 						"translation.y": 495.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 12,
 					"type": "text"
 				},
 				{
@@ -909,8 +959,8 @@
 						"selection":
 						[
 							[
-								1332,
-								1332
+								3757,
+								3524
 							]
 						],
 						"settings":
@@ -919,14 +969,102 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1460.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
+					"file": "app/js/services/TVRemoteService.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13556,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11698,
+								11698
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 4.0,
+						"translation.y": 5009.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/js/controllers/ApplicationController.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2179,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								414,
+								414
+							]
+						],
+						"settings":
+						{
+							"auto_name": "'use strict';",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 305.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5611,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4421,
+								4356
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1595.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
 					"file": "test/unit/controllers/TVCommandControllerSpec.js",
 					"semi_transient": false,
 					"settings":
@@ -945,30 +1083,31 @@
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 270.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 7,
 					"file": "server.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4673,
+						"buffer_size": 4956,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								483,
-								483
+								2940,
+								2949
 							]
 						],
 						"settings":
@@ -978,27 +1117,147 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 90.0,
+						"translation.y": 1177.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "package.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2062,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								285,
+								285
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "api/tv.js",
+					"buffer": 9,
+					"file": "api/services/ipService.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 18203,
+						"buffer_size": 863,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								14328,
-								14333
+								820,
+								820
+							]
+						],
+						"settings":
+						{
+							"auto_name": "'use strict';",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "api/tv.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 18687,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2449,
+								2449
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 6.0,
+						"translation.y": 3509.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "api/services/discoveryService.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5135,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4634,
+								4634
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 2.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "api/services/tvService.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8963,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8347,
+								8347
 							]
 						],
 						"settings":
@@ -1008,14 +1267,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 6525.0,
+						"translation.y": 2694.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 13,
 					"file": "app/js/app.js",
 					"semi_transient": false,
 					"settings":
@@ -1040,7 +1299,7 @@
 						"translation.y": 945.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 11,
 					"type": "text"
 				}
 			]

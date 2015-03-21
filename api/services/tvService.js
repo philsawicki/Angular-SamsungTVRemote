@@ -217,6 +217,8 @@ var TVService = function () {
         };
 
         var buffer = '';
+        var requestHasError = false;
+        var requestError = {};
 
         var tvReq = http.request(getRequest, function (tvRes) {
             tvRes.setEncoding('utf8');
@@ -224,8 +226,16 @@ var TVService = function () {
             tvRes.on('data', function (data) {
                 buffer += data;
             });
+            tvRes.on('error', function (error) {
+                requestHasError = true;
+                requestError = error;
+            });
             tvRes.on('end', function (data) {
-                deferred.resolve(buffer);
+                if (!requestHasError) {
+                    deferred.resolve(buffer);
+                } else {
+                    deferred.reject(requestError);
+                }
             });
         });
 
