@@ -36,7 +36,7 @@
     "prestart": "npm install",
     "start": "http-server -a localhost -p 8000 -c-1",
     "pretest": "npm install",
-    "test": "karma start karma.conf.js",
+    "TEMP_NO__test": "karma start karma.conf.js",
     "test-single-run": "karma start karma.conf.js  --single-run",
     "test-api": "jasmine-node api-spec --autotest --watch .",
     "preupdate-webdriver": "npm install",
