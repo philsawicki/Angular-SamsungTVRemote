@@ -3,8 +3,7 @@
 /**
  * Local Storage Service.
  */
-angular.module('smartTVRemote.Services')
-	.factory('storageService', ['$window', function ($window) {
+module.exports = function ($window) {
 		/**
 		 * Saves the given value to storage.
 		 * @param {string} key   The key uniquely identifying the value to store.
@@ -60,4 +59,6 @@ angular.module('smartTVRemote.Services')
 			deleteData: deleteData,
 			deleteAllData: deleteAllData
 		}
-	}]);
+	};
+
+module.exports.$inject = ['$window'];

@@ -1,11 +1,10 @@
 'use strict';
 
+
 /**
  * Home Page Controller.
  */
-angular.module('smartTVRemote.Controllers')
-	.controller('HomePageController', ['$scope', '$timeout', 'tvRemoteService', 'discoveryService', 'applicationStorageService',
-		function ($scope, $timeout, tvRemoteService, discoveryService, applicationStorageService) {
+module.exports = function ($scope, $timeout, tvRemoteService, discoveryService, applicationStorageService) {
 			/**
 			 * Check if there is a TV IP save in the Storage Service.
 			 * @type {bool}
@@ -73,5 +72,6 @@ angular.module('smartTVRemote.Controllers')
 						console.log(reason);
 					})
 			}, 100);
-		}
-	]);
+		};
+
+module.exports.$inject = ['$scope', '$timeout', 'tvRemoteService', 'discoveryService', 'applicationStorageService'];

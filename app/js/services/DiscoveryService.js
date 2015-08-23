@@ -3,9 +3,7 @@
 /**
  * UPnP Discovery Service.
  */
-angular.module('smartTVRemote.Services')
-	.factory('discoveryService', ['$q', '$http', '$timeout', 'appConfig', 'errorMessages', 
-		function ($q, $http, $timeout, appConfig, errorMessages) {
+module.exports = function ($q, $http, $timeout, appConfig, errorMessages) {
 			// URL of the API Server:
 			var APIServer = appConfig.APIServer;
 
@@ -140,5 +138,6 @@ angular.module('smartTVRemote.Services')
 				getConnectedSamsungSmartTVs: getConnectedSamsungSmartTVs,
 				getConnectedDevices: getConnectedDevices
 			};
-		}
-	]);
+		};
+
+module.exports.$inject = ['$q', '$http', '$timeout', 'appConfig', 'errorMessages'];

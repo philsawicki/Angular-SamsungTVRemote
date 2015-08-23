@@ -3,7 +3,8 @@
 /**
  * About Page Controller
  */
-angular.module('smartTVRemote.Controllers')
-	.controller('AboutPageController', ['$scope', function ($scope) {
-		
-	}]);
+module.exports = function ($scope) {
+	
+};
+
+module.exports.$inject = ['$scope'];

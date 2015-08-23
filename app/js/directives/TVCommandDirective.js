@@ -1,21 +1,22 @@
 'use strict';
 
+var fs = require('fs');
+
 /**
  * "<tv-command>" Directive.
  */
-angular.module('smartTVRemote.Directives')
-	.directive('tvCommand', function () {
-		return {
-			restrict: 'E',
-			scope: {
-				title: '@',
-				ctaTitle: '@',
-				keyboardShortcut: '@',
-				keyCode: '@',
-				command: '@',
-				icon: '@'
-			},
-			templateUrl: 'views/partial-tvCommand.html',
-			controller: 'TVCommandController'
-		};
-	});
+module.exports = function () {
+	return {
+		restrict: 'E',
+		scope: {
+			title: '@',
+			ctaTitle: '@',
+			keyboardShortcut: '@',
+			keyCode: '@',
+			command: '@',
+			icon: '@'
+		},
+		template: fs.readFileSync(__dirname + './../../views/partial-tvCommand.html', 'utf-8'),
+		controller: 'TVCommandController'
+	};
+};

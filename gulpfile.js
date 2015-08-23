@@ -2,7 +2,10 @@
 var fs = require('fs'),
     chalk = require('chalk'),
     es = require('event-stream'),
-    cs = require('combined-stream');
+    cs = require('combined-stream'),
+    browserify = require('browserify'),
+    source = require('vinyl-source-stream'),
+    buffer = require('vinyl-buffer');
 
 // Gulp and plugins:
 var gulp = require('gulp'),
@@ -14,7 +17,8 @@ var gulp = require('gulp'),
     templateCache = require('gulp-angular-templatecache'),
     minifyCSS = require('gulp-minify-css'),
     minifyHTML = require('gulp-minify-html'),
-    uncss = require('gulp-uncss');
+    uncss = require('gulp-uncss'),
+    sourcemaps = require('gulp-sourcemaps');
 
 
 /**
@@ -31,34 +35,50 @@ gulp.task('package-partials', function() {
  * Minify JS.
  */
 gulp.task('minify-js', ['package-partials'], function() {
-    // Library references (order-dependent):
-    var libs = [
-        // Libraries:
-        './lib/x2js-v1.1.5/xml2json.js',
-        './app/bower_components/toastr/toastr.min.js',
-
-        //'./app/bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js',
-        //'./app/bower_components/jquery/dist/jquery.js',
-        //'./app/bower_components/angular/angular.js',
-        //'./app/bower_components/angular-route/angular-route.js',
-        //'./app/bower_components/bootstrap/dist/js/bootstrap.min.js',
-        //'./app/bower_components/globalize/lib/globalize.js',
-        //'./app/bower_components/globalize/lib/cultures/globalize.culture.en-GB.js',
-        //'./app/bower_components/d3/d3.min.js',
-        //'./app/bower_components/jquery-mockjax/jquery.mockjax.js'
-        
-        // Application scripts:
-        './app/js/**/*.js',
-        './tmp/templates.js'
-    ];
-
-    var jsStream = cs.create();
-    jsStream.append(gulp.src(libs));
-
-    return jsStream
-        .pipe(concat('scripts.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('./dist/js/'));
+	var b = browserify({
+		entries: './app/js/app.js',
+        transform: ['brfs'],
+		debug: true
+	});
+	
+	return b.bundle()
+		.pipe(source('scripts.js'))
+		.pipe(buffer())
+		.pipe(sourcemaps.init({loadMaps: true}))
+			// Add transformation tasks:
+			.pipe(uglify())
+			//.on('error', gutil.log)
+		.pipe(sourcemaps.write('./'))
+		.pipe(gulp.dest('./dist/js'));
+	
+    //// Library references (order-dependent):
+    //var libs = [
+    //    // Libraries:
+    //    './lib/x2js-v1.1.5/xml2json.js',
+    //    './app/bower_components/toastr/toastr.min.js',
+    //
+    //    //'./app/bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js',
+    //    //'./app/bower_components/jquery/dist/jquery.js',
+    //    //'./app/bower_components/angular/angular.js',
+    //    //'./app/bower_components/angular-route/angular-route.js',
+    //    //'./app/bower_components/bootstrap/dist/js/bootstrap.min.js',
+    //    //'./app/bower_components/globalize/lib/globalize.js',
+    //    //'./app/bower_components/globalize/lib/cultures/globalize.culture.en-GB.js',
+    //    //'./app/bower_components/d3/d3.min.js',
+    //    //'./app/bower_components/jquery-mockjax/jquery.mockjax.js'
+    //    
+    //    // Application scripts:
+    //    './app/js/**/*.js',
+    //    './tmp/templates.js'
+    //];
+    //
+    //var jsStream = cs.create();
+    //jsStream.append(gulp.src(libs));
+    //
+    //return jsStream
+    //    .pipe(concat('scripts.js'))
+    //    .pipe(uglify())
+    //    .pipe(gulp.dest('./dist/js/'));
 });
 
 /**

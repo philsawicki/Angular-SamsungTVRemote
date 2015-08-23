@@ -4,9 +4,7 @@
  * Application Controller.
  * http://stackoverflow.com/questions/20909778/how-to-use-socket-io-in-express-routes
  */
-angular.module('smartTVRemote.Controllers')
-    .controller('ApplicationController', ['$scope', 'tvRemoteService', 'applicationStorageService',
-        function ($scope, tvRemoteService, applicationStorageService) {
+module.exports = function ($scope, tvRemoteService, applicationStorageService) {
             /**
              * Check if there is a TV IP saved in the Storage Service.
              * @type {bool}
@@ -55,5 +53,6 @@ angular.module('smartTVRemote.Controllers')
 
                 tvRemoteService.unsubscribeFromTVNotifications(tvIP);
             });
-        }
-    ]);
+        };
+
+module.exports.$inject = ['$scope', 'tvRemoteService', 'applicationStorageService'];

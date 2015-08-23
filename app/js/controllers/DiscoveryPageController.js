@@ -3,9 +3,7 @@
 /**
  * Discovery Page Controller.
  */
-angular.module('smartTVRemote.Controllers')
-	.controller('DiscoveryPageController', ['$scope', 'discoveryService', 'tvRemoteService', 'applicationStorageService',
-		function ($scope, discoveryService, tvRemoteService, applicationStorageService) {
+module.exports = function ($scope, discoveryService, tvRemoteService, applicationStorageService) {
 			/**
 			 * Get SmartTVs connected through UPnP.
 			 * @return {void}
@@ -113,5 +111,6 @@ angular.module('smartTVRemote.Controllers')
 					$scope.getTVDetails(tvDevice);
 				}
 			};
-		}
-	]);
+		};
+
+module.exports.$inject = ['$scope', 'discoveryService', 'tvRemoteService', 'applicationStorageService'];

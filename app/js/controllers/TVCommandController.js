@@ -3,9 +3,7 @@
 /**
  * TV Command Directive Controller.
  */
-angular.module('smartTVRemote.Controllers')
-	.controller('TVCommandController', ['$scope', '$element', '$document', 'tvRemoteService', 'applicationStorageService',
-		function ($scope, $element, $document, tvRemoteService, applicationStorageService) {
+module.exports = function ($scope, $element, $document, tvRemoteService, applicationStorageService) {
 			var elementToDisable = $element.find('.js-remote-command-button');
 
 			/**
@@ -132,5 +130,6 @@ angular.module('smartTVRemote.Controllers')
 			$scope.$on('$destroy', function () {
 				$document.off('keydown', $scope.keypressHandler);
 			});
-		}
-	]);
+		};
+
+module.exports.$inject = ['$scope', '$element', '$document', 'tvRemoteService', 'applicationStorageService'];

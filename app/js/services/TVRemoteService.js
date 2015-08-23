@@ -3,9 +3,7 @@
 /**
  * SmartTV Remote Service.
  */
-angular.module('smartTVRemote.Services')
-	.factory('tvRemoteService', ['$q', '$http', '$timeout', 'appConfig', 'errorMessages', 'XMLToJSON',
-		function ($q, $http, $timeout, appConfig, errorMessages, XMLToJSON) {
+module.exports = function ($q, $http, $timeout, appConfig, errorMessages, XMLToJSON) {
 			// URL of the API Server:
 			var APIServer = appConfig.APIServer;
 
@@ -428,5 +426,6 @@ angular.module('smartTVRemote.Services')
 				subscribeToTVNotifications: subscribeToTVNotifications,
 				unsubscribeFromTVNotifications: unsubscribeFromTVNotifications
 			};
-		}
-	]);
+		};
+
+module.exports.$inject = ['$q', '$http', '$timeout', 'appConfig', 'errorMessages', 'XMLToJSON'];

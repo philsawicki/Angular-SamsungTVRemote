@@ -1,5 +1,9 @@
 'use strict';
 
+var angular = require('angular');
+require('angular-route');
+require('angular-animate');
+
 
 // Declare "Controllers" module for the app:
 angular.module('smartTVRemote.Controllers', []);
@@ -11,6 +15,12 @@ angular.module('smartTVRemote.Filters', []);
 angular.module('smartTVRemote.Providers', []);
 // Declare "Services" module for the app:
 angular.module('smartTVRemote.Services', []);
+
+require('./controllers');
+require('./directives');
+require('./filters');
+require('./providers');
+require('./services');
 
 
 // Declare app-level module which depends on views, and components:
@@ -25,28 +35,11 @@ angular.module('smartTVRemote', [
 ])
 	
 	// Setup the application routes:
-	.config(['$routeProvider', function ($routeProvider) {
-		$routeProvider
-			.when('/', {
-				templateUrl: 'views/page-home.html',
-				controller: 'HomePageController'
-			})
-			.when('/about', {
-				templateUrl: 'views/page-about.html',
-				controller: 'AboutPageController'
-			})
-			.when('/discovery', {
-				templateUrl: 'views/page-discovery.html',
-				controller: 'DiscoveryPageController'
-			})
-			.otherwise({
-				redirectTo: '/'
-			});
-	}])
+	.config(require('./routes'))
 
 	// Disable debug info for production builds:
 	.config(['$compileProvider', 'appConfigProvider', function ($compileProvider, appConfigProvider) {
-		var isDevServer = window.location.href.indexOf('http://localhost:8000/app') !== -1;
+		var isDevServer = window.location.href.indexOf('http://localhost:8000/dist') !== -1;
 
 		// Disable debug information on production
 		$compileProvider.debugInfoEnabled(!isDevServer);

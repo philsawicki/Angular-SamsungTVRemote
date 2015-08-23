@@ -47,8 +47,16 @@
     "update-index-async": "node -e \"require('shelljs/global'); sed('-i', /\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/, '//@@NG_LOADER_START@@\\n' + sed(/sourceMappingURL=angular-loader.min.js.map/,'sourceMappingURL=bower_components/angular-loader/angular-loader.min.js.map','app/bower_components/angular-loader/angular-loader.min.js') + '\\n//@@NG_LOADER_END@@', 'app/index-async.html');\""
   },
   "devDependencies": {
+    "angular": "^1.4.4",
+    "angular-animate": "^1.4.4",
+    "angular-route": "^1.4.4",
+    "brfs": "^1.4.1",
+    "browserify": "^11.0.1",
+    "gulp-sourcemaps": "^1.5.2",
     "gulp-uncss": "^1.0.0",
     "karma-coverage": "^0.2.7",
-    "q": "^1.1.2"
+    "q": "^1.1.2",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
