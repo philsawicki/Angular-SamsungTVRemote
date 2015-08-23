@@ -14,31 +14,20 @@ var gulp = require('gulp'),
     replace = require('gulp-replace'),
     uglify = require('gulp-uglify'),
     htmlReplace = require('gulp-html-replace'),
-    templateCache = require('gulp-angular-templatecache'),
     minifyCSS = require('gulp-minify-css'),
     minifyHTML = require('gulp-minify-html'),
-    uncss = require('gulp-uncss'),
+    //uncss = require('gulp-uncss'),
     sourcemaps = require('gulp-sourcemaps');
 
 
 /**
- * Package up the Views into a single initial download.
- */
-gulp.task('package-partials', function() {
-    return gulp.src(['./app/views/**/*.html'])
-        .pipe(minifyHTML({ empty: true, quotes: true }))
-        .pipe(templateCache('templates.js', { root: 'views/', module: 'smartTVRemote' }))
-        .pipe(gulp.dest('./tmp'));
-});
-
-/**
  * Minify JS.
  */
-gulp.task('minify-js', ['package-partials'], function() {
+gulp.task('minify-js', function () {
 	var b = browserify({
 		entries: './app/js/app.js',
-        transform: ['brfs'],
-		debug: true
+        transform: ['brfs-htmlmin'],
+		debug: false
 	});
 	
 	return b.bundle()
@@ -84,7 +73,7 @@ gulp.task('minify-js', ['package-partials'], function() {
 /**
  * Minify CSS files, rewrite relative paths of Bootstrap fonts & copy Bootstrap fonts.
  */
-gulp.task('minify-css', function() {
+gulp.task('minify-css', function () {
     var //bootstrapBaseCSS = gulp.src('app/bower_components/bootstrap/dist/css/bootstrap.min.css')
         //    .pipe(replace(/url\((')?\.\.\/fonts\//g, 'url($1fonts/')),
         //bootstrapThemeCSS = gulp.src('app/bower_components/bootstrap/dist/css/bootstrap-theme.min.css'),
@@ -118,7 +107,7 @@ gulp.task('minify-css', function() {
 /**
  * Copy index.html, replacing "<script>" and "<link>" tags to reference production URLs.
  */
-gulp.task('minify-html', function() {
+gulp.task('minify-html', function () {
     // Minify HTML for the "async" JS loader:
     gulp.src('./app/index-async.html')
         .pipe(htmlReplace({
@@ -141,25 +130,25 @@ gulp.task('minify-html', function() {
 /**
  * Removes all files from "./dist" & "./tmp".
  */
-gulp.task('clean', function() {
-    return gulp.src(['./dist/**/*', './tmp/**/*'], { read: false })
+gulp.task('clean', function () {
+    return gulp.src(['./dist/**/*'], { read: false })
         .pipe(clean());
 });
 
 /**
  * Rerun the tasks when a file changes.
  */
-gulp.task('watch', function() {
-    gulp.watch(['app/js/**/*.js'], ['minify-js']);
+gulp.task('watch', function () {
+    gulp.watch(['app/js/**/*.js'],   ['minify-js']);
     gulp.watch(['app/css/**/*.css'], ['minify-css']);
-    gulp.watch(['app/*.html'], ['minify-html']);
-    gulp.watch(['app/views/*.html'], ['minify-js']); // Calls "package-partials" then "minify-js" (for templateCache)
+    gulp.watch(['app/*.html'],       ['minify-html']);
+    gulp.watch(['app/views/*.html'], ['minify-js']);
 });
 
 /**
  * Build tasks.
  */
-gulp.task('build', ['minify-html', 'minify-js', 'minify-css'], function() {
+gulp.task('build', ['minify-html', 'minify-js', 'minify-css'], function () {
     console.log('\nPlaced optimized files in ' + chalk.magenta('./dist\n'));
 });
 

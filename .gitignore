@@ -48,9 +48,6 @@ node_modules/
 app/bower_components/
 npm-debug.log
 
-# Temporary files & folders
-tmp/
-
 # Code coverage files:
 build/
 Angular-SamsungTVRemote.sublime-workspace
