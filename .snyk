@@ -1,0 +1,20 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.10.2
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:minimatch:20160620':
+    - karma-coverage > ibrik > fileset > minimatch:
+        patched: '2018-03-15T04:12:24.164Z'
+    - brfs-htmlmin > html-minifier > cli > glob > minimatch:
+        patched: '2018-03-15T04:12:24.164Z'
+    - karma-coverage > ibrik > fileset > glob > minimatch:
+        patched: '2018-03-15T04:12:24.164Z'
+    - karma-coverage > ibrik > istanbul > fileset > minimatch:
+        patched: '2018-03-15T04:12:24.164Z'
+  'npm:tough-cookie:20170905':
+    - gulp-uncss > uncss > request > tough-cookie:
+        patched: '2018-03-15T04:12:24.164Z'
+  'npm:uglify-js:20151024':
+    - brfs-htmlmin > html-minifier > uglify-js:
+        patched: '2018-03-15T04:12:24.164Z'
