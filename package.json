@@ -24,7 +24,7 @@
     "gulp-uglify": "~0.2.1",
     "http-server": "^0.6.1",
     "jasmine-node": "~1.14.5",
-    "karma": "~0.10",
+    "karma": "~0.13.0",
     "karma-junit-reporter": "^0.2.2",
     "lcov-filter": "0.0.1",
     "node-ssdp": "~1.0.0",
