@@ -27,7 +27,7 @@
     "karma": "~0.10",
     "karma-junit-reporter": "^0.2.2",
     "lcov-filter": "0.0.1",
-    "node-ssdp": "~1.0.0",
+    "node-ssdp": "~2.7.0",
     "protractor": "^1.1.1",
     "shelljs": "^0.2.6"
   },
