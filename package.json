@@ -29,7 +29,7 @@
     "lcov-filter": "0.0.1",
     "node-ssdp": "~1.0.0",
     "protractor": "^1.1.1",
-    "shelljs": "^0.2.6"
+    "shelljs": "^0.8.5"
   },
   "scripts": {
     "postinstall": "bower install",
